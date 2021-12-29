@@ -1,15 +1,8 @@
 package cz.praguecityuniversity;
 
-import javax.sound.sampled.Port;
-
 public class Main {
 
     public static void main(String[] args) {
-        // Getting packet fields example
-//        Packet packet = new Packet("14.12.12.12","1221121","data");
-//        System.out.println(packet.getData());
-//        System.out.println(packet.getDestinationIP());
-//        System.out.println(packet.getSourceIP());
         PortInterface[] portInterfaceArray = new PortInterface[1];
         portInterfaceArray[0] = new PortInterface("123", null);
         EthernetNetworkAdapter ethernetNetworkAdapter = new EthernetNetworkAdapter("adapter", portInterfaceArray, null);
@@ -27,6 +20,5 @@ public class Main {
         System.out.println(ip.parseAsInt(ip.IPAddressStr));
         System.out.println(ip.networkStr);
         System.out.println(ip.parseAsInt(ip.networkStr));
-        System.out.println(Integer.toBinaryString(10));
     }
 }

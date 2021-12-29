@@ -16,7 +16,6 @@ public class IPv4 {
         this.IPAddressStr = IPAddress;
        String[] IPAddressArr = IPAddress.split("\\.");
        this.mask = Integer.parseInt(split[1]);
-       int shift_value = 24;
        IPOctets = new ArrayList<>();
         for (String IPStr : IPAddressArr) {
             ArrayList<Integer> octet = new ArrayList<>();
@@ -52,7 +51,7 @@ public class IPv4 {
         for (ArrayList<Integer> octet: this.networkOctets) {
             StringBuilder octetString = new StringBuilder();
             for (Integer num: octet) {
-                octetString.append(Integer.toString(num));
+                octetString.append(num);
             }
             octetStrings.add(Integer.toString(Integer.parseInt(String.valueOf(octetString), 2)));
         }
