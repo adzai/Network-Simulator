@@ -1,8 +1,14 @@
 package cz.praguecityuniversity;
 
 public class WirelessNetworkAdapter extends NetworkAdapter{
-    @Override
-    public void handleEvent(Event event) {
 
+    WirelessNetworkAdapter(String deviceName, PortInterface[] arrayOfPortInterfaces) {
+        super(deviceName, arrayOfPortInterfaces);
+    }
+
+    @Override
+    public Event handleEvent(Event event) {
+
+        return event;
     }
 }

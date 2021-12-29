@@ -1,6 +1,12 @@
 package cz.praguecityuniversity;
 
 public class PortInterface {
-    private String ipAddress;
-    private Connection connection;
+    String ipAddress;
+    Connection connection;
+
+    PortInterface(String ipAddress, Connection connection) {
+
+        this.ipAddress = ipAddress;
+        this.connection = connection;
+    }
 }

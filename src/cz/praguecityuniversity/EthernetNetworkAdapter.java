@@ -1,9 +1,15 @@
 package cz.praguecityuniversity;
 
 public class EthernetNetworkAdapter extends NetworkAdapter{
-    @Override
-    public void handleEvent(Event event) {
 
+    EthernetNetworkAdapter(String deviceName, PortInterface[] arrayOfPortInterfaces) {
+        super(deviceName, arrayOfPortInterfaces);
+    }
+
+    @Override
+    public Event handleEvent(Event event) {
+
+        return event;
     }
 }
 

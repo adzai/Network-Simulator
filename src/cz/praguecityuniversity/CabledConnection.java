@@ -1,9 +1,12 @@
 package cz.praguecityuniversity;
 
 public class CabledConnection extends Connection{
+    CabledConnection() {
 
+    }
     @Override
-    public void handleEvent(Event event) {
+    public Event handleEvent(Event event) {
 
+        return event;
     }
 }

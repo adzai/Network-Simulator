@@ -1,11 +1,11 @@
 package cz.praguecityuniversity;
 
-public class Device implements EventHandler{
-    private String deviceName;
-    WirelessNetworkAdapter wirelessNetworkAdapter;
-    EthernetNetworkAdapter ethernetNetworkAdapter;
-    PortInterface[] arrayOfPortInterfaces;
+import javax.sound.sampled.Port;
 
-    @Override
-    public void handleEvent(Event event) {}
+public abstract class Device implements EventHandler{
+    String deviceName;
+
+    Device(String deviceName) {
+        this.deviceName = deviceName;
+    }
 }
