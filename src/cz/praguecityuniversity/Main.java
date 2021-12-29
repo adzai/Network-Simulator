@@ -17,6 +17,7 @@ public class Main {
         es.schedule(event);
         IPv4 ip = new IPv4("1.0.0.1/24");
         System.out.println(ip.IPOctets);
+        System.out.println(ip.mask);
         System.out.println(ip.parseAsInt(ip.IPAddressStr));
         System.out.println(ip.networkStr);
         System.out.println(ip.parseAsInt(ip.networkStr));

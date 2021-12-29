@@ -32,17 +32,18 @@ public class IPv4 {
             this.IPOctets.add(octet);
         }
         this.networkOctets = new ArrayList<>();
+        int mask = this.mask;
             for (int i = 0; i < 4; i++) {
                 ArrayList<Integer> octet = this.IPOctets.get(i);
                 ArrayList<Integer> networkOctet = new ArrayList<>();
                 for (int j = 0; j < 8; j++) {
                     int ipBit = octet.get(j);
-                    if (this.mask == 0) {
+                    if (mask == 0) {
                         networkOctet.add(0);
                     }
                     else {
                         networkOctet.add(ipBit);
-                        this.mask -= 1;
+                        mask -= 1;
                     }
                 }
                 this.networkOctets.add(networkOctet);
