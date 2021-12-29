@@ -1,6 +1,5 @@
 package cz.praguecityuniversity;
 
-import javax.sound.sampled.Port;
 
 public abstract class Device implements EventHandler{
     String deviceName;
