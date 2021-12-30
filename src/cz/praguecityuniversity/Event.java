@@ -5,13 +5,13 @@ public class Event {
     String data;
     TypeOfConnection connection;
     int startingTime;
-    String sourceIPAddress;
-    String destinationIPAddress;
+    IPv4 sourceIPAddress;
+    IPv4 destinationIPAddress;
     Device device;
 
 
     public Event(String eventName, String data, TypeOfConnection connection,
-                 int startingTime, String sourceIPAddress, String destinationIPAddress, Device device) {
+                 int startingTime, IPv4 sourceIPAddress, IPv4 destinationIPAddress, Device device) {
         this.eventName = eventName;
         this.data = data;
         this.connection = connection;
