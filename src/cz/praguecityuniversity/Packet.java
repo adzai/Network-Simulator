@@ -2,9 +2,9 @@ package cz.praguecityuniversity;
 
 public class Packet {
     //TODO verify IP addresses
-    private String sourceIP;
-    private String destinationIP;
-    private String data;
+    private final String sourceIP;
+    private final String destinationIP;
+    private final String data;
 
     public Packet(String sourceIP, String destinationIP, String data) {
         this.sourceIP = sourceIP;
