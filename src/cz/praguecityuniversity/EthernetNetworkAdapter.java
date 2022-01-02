@@ -18,15 +18,6 @@ public class EthernetNetworkAdapter extends NetworkAdapter{
         }
     }
 
-    void removePortInterface(int portInterfaceIndex) throws InvalidPortInterface {
-        if(!arrayOfPortInterfaces.isEmpty() && arrayOfPortInterfaces.get(portInterfaceIndex) != null){
-            arrayOfPortInterfaces.remove(portInterfaceIndex);
-        }
-        else {
-            throw new InvalidPortInterface("Port " + portInterfaceIndex + " is not defined on the device.");
-        }
-    }
-
     public void addIPAddressToPortInterface (int portInterfaceIndex, IPv4 IPAddress) throws InvalidPortInterface {
         if(!arrayOfPortInterfaces.isEmpty() && arrayOfPortInterfaces.get(portInterfaceIndex) != null){
             for(PortInterface portInterface : arrayOfPortInterfaces){

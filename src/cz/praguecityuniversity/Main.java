@@ -45,9 +45,6 @@ public class Main {
             }
         }
 
-        ethernetNetworkAdapterRouter.removePortInterface(0);
-        //TODO addStaticRoute does not give exception when the port is removed because indexes of ports change.
-        // Hashmap for Port Interfaces?
         router.addStaticRoute(0,new IPv4("3.0.0.0/24"));
         router.addStaticRoute(1,new IPv4("2.0.0.0/24"));
         router.removeStaticRoute(new IPv4("3.0.0.0/24"));
