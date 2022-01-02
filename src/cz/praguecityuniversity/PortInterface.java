@@ -1,12 +1,18 @@
 package cz.praguecityuniversity;
 
 public class PortInterface {
-    String ipAddress;
-    Connection connection;
+    private IPv4 ipAddress;
+    CabledConnection connection;
 
-    PortInterface(String ipAddress, Connection connection) {
-
-        this.ipAddress = ipAddress;
+    PortInterface(CabledConnection connection) {
         this.connection = connection;
+    }
+
+    public IPv4 getIpAddress() {
+        return ipAddress;
+    }
+
+    public void setIpAddress(IPv4 ipAddress) {
+        this.ipAddress = ipAddress;
     }
 }

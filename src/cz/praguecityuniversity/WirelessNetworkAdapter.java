@@ -1,8 +1,9 @@
 package cz.praguecityuniversity;
 
 public class WirelessNetworkAdapter extends NetworkAdapter{
-    WirelessNetworkAdapter(String deviceName, PortInterface[] arrayOfPortInterfaces, Device device) {
-        super(deviceName, arrayOfPortInterfaces, device);
+
+    WirelessNetworkAdapter(String deviceName, Device device) {
+        super(deviceName, device);
     }
 
     @Override
