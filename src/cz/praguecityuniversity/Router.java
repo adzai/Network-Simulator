@@ -1,5 +1,6 @@
 package cz.praguecityuniversity;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Router extends Device{
@@ -11,17 +12,26 @@ public class Router extends Device{
         this.ethernetNetworkAdapter = ethernetNetworkAdapter;
     }
 
-    public void addStaticRoute(int portInterfaceIndex, IPv4 networkIPAddress){
-        if (portInterfaceIndex >= 0 && portInterfaceIndex < ethernetNetworkAdapter.arrayOfPortInterfaces.size()){
+    public void addStaticRoute(int portInterfaceIndex, IPv4 networkIPAddress) throws InvalidPortInterface, InvalidIPAddress {
+        ArrayList<PortInterface> arrayOfPortInterfaces = ethernetNetworkAdapter.arrayOfPortInterfaces;
+        boolean IPAddressIsUsed = false;
+
+        if(!arrayOfPortInterfaces.isEmpty() && arrayOfPortInterfaces.get(portInterfaceIndex) != null){
             if(!routingTable.isEmpty()){
                 for (IPv4 IPAddress : routingTable.keySet()){
                     if (IPAddress.getNetworkAddressVal() == networkIPAddress.getNetworkAddressVal()){
-                        System.out.println("The given network IP address is already assigned to another port");
-                    }
-                    else {
-                        routingTable.put(networkIPAddress, portInterfaceIndex);
+                        IPAddressIsUsed = true;
                         break;
                     }
+                    else {
+                        IPAddressIsUsed = false;
+                    }
+                }
+                if(IPAddressIsUsed){
+                    throw new InvalidIPAddress("The given network IP address is already assigned to another port");
+                }
+                else {
+                    routingTable.put(networkIPAddress, portInterfaceIndex);
                 }
             }
             else {
@@ -29,24 +39,24 @@ public class Router extends Device{
             }
         }
         else {
-            System.out.println("The given port interface number exceeds the number of router's port interfaces");
+            throw new InvalidPortInterface("Port " + portInterfaceIndex + " is not defined on the device.");
         }
     }
 
-    public void removeStaticRoute(IPv4 networkIPAddress){
+    public void removeStaticRoute(IPv4 networkIPAddress) throws InvalidIPAddress, EmptyRoutingTable {
         if(!routingTable.isEmpty()) {
             for (IPv4 IPAddress : routingTable.keySet()) {
                 if (IPAddress.getNetworkAddressVal() == networkIPAddress.getNetworkAddressVal()) {
                     routingTable.remove(IPAddress);
                     break;
                 } else {
-                    System.out.println("The given network IP address is not in the routing table.");
-
+                    throw new InvalidIPAddress("The IP address - " + networkIPAddress.getNetworkAddressStr() +
+                            " is not in the routing table.");
                 }
             }
         }
         else{
-            System.out.println("The routing table is empty.");
+            throw new EmptyRoutingTable("The routing table is empty.");
         }
     }
 

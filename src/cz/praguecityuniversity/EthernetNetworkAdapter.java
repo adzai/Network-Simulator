@@ -18,27 +18,47 @@ public class EthernetNetworkAdapter extends NetworkAdapter{
         }
     }
 
-    public void addIPAddressToPortInterface (int portInterfaceIndex, IPv4 IPAddress){
-        if (portInterfaceIndex >=0 && portInterfaceIndex < arrayOfPortInterfaces.size()){
-            if(arrayOfPortInterfaces.get(portInterfaceIndex) == null){
-                System.out.println("The given port interface index is not defined on the device.");
-            }
-            else {
-                for(PortInterface portInterface : arrayOfPortInterfaces){
-                    if(portInterface.getIpAddress() != null &&
-                            portInterface.getIpAddress().getNetworkAddressVal() == IPAddress.getNetworkAddressVal()){
-                        System.out.printf("Port %s is already assigned to the given network IP address.",
-                                arrayOfPortInterfaces.indexOf(portInterface));
-                    }
-                    else {
-                        arrayOfPortInterfaces.get(portInterfaceIndex).setIpAddress(IPAddress);
-                        break;
-                    }
+    void removePortInterface(int portInterfaceIndex) throws InvalidPortInterface {
+        if(!arrayOfPortInterfaces.isEmpty() && arrayOfPortInterfaces.get(portInterfaceIndex) != null){
+            arrayOfPortInterfaces.remove(portInterfaceIndex);
+        }
+        else {
+            throw new InvalidPortInterface("Port " + portInterfaceIndex + " is not defined on the device.");
+        }
+    }
+
+    public void addIPAddressToPortInterface (int portInterfaceIndex, IPv4 IPAddress) throws InvalidPortInterface {
+        if(!arrayOfPortInterfaces.isEmpty() && arrayOfPortInterfaces.get(portInterfaceIndex) != null){
+            for(PortInterface portInterface : arrayOfPortInterfaces){
+                if(portInterface.getIpAddress() != null &&
+                        portInterface.getIpAddress().getNetworkAddressVal() == IPAddress.getNetworkAddressVal()){
+                    throw new InvalidPortInterface("Port " + arrayOfPortInterfaces.indexOf(portInterface)
+                            + " is already assigned to the network IP address - " + IPAddress.getNetworkAddressStr());
+                }
+                else {
+                    arrayOfPortInterfaces.get(portInterfaceIndex).setIpAddress(IPAddress);
+                    break;
                 }
             }
         }
         else {
-            System.out.println("The given port interface index exceeds the number of defined port interfaces.");
+            throw new InvalidPortInterface("Port " + portInterfaceIndex +
+                    " is not defined on the device");
+        }
+    }
+
+    public void removeIPAddressFromPortInterface (int portInterfaceIndex) throws InvalidPortInterface {
+        if(!arrayOfPortInterfaces.isEmpty() && arrayOfPortInterfaces.get(portInterfaceIndex) != null){
+            if(arrayOfPortInterfaces.get(portInterfaceIndex).getIpAddress() != null){
+                arrayOfPortInterfaces.get(portInterfaceIndex).setIpAddress(null);
+            }
+            else {
+                throw new InvalidPortInterface("IP Address is not assigned to the port " + portInterfaceIndex);
+            }
+        }
+        else {
+            throw new InvalidPortInterface("Port" + portInterfaceIndex +
+                    "is not defined on the device");
         }
     }
 

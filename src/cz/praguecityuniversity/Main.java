@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Main {
 
-    public static void main(String[] args) throws InvalidIPAddress, InvalidMask, RouteNotFound {
+    public static void main(String[] args) throws InvalidIPAddress, InvalidMask, RouteNotFound, InvalidPortInterface, EmptyRoutingTable {
         EthernetNetworkAdapter ethernetNetworkAdapterComputer = new EthernetNetworkAdapter("adapter", 1, null);
         Computer computer = new Computer("Computer 1", ethernetNetworkAdapterComputer);
         ethernetNetworkAdapterComputer.device = computer;
@@ -24,18 +24,30 @@ public class Main {
         es.next();
         System.out.println(Objects.requireNonNull(es.eventQueue.poll()).device);
 
+        System.out.println("__________________Router");
+
         Router router = new Router("Router 1",null);
         EthernetNetworkAdapter ethernetNetworkAdapterRouter = new EthernetNetworkAdapter("Router adapter",
-                2, null);
+                5, null);
         router.ethernetNetworkAdapter = ethernetNetworkAdapterRouter;
         ethernetNetworkAdapterRouter.device = router;
 
         ethernetNetworkAdapterRouter.addIPAddressToPortInterface(0,new IPv4("1.0.0.1/24"));
         ethernetNetworkAdapterRouter.addIPAddressToPortInterface(1,new IPv4("2.0.0.1/24"));
         ethernetNetworkAdapterRouter.addIPAddressToPortInterface(0,new IPv4("3.0.0.1/24"));
+        ethernetNetworkAdapterRouter.addIPAddressToPortInterface(2,new IPv4("4.0.0.1/24"));
 
-        System.out.println(ethernetNetworkAdapterRouter.arrayOfPortInterfaces.get(0).getIpAddress().getIPAddressStr());
+        ethernetNetworkAdapterRouter.removeIPAddressFromPortInterface(0);
 
+        for (PortInterface portInterface : ethernetNetworkAdapterRouter.arrayOfPortInterfaces){
+            if(portInterface.getIpAddress() != null){
+                System.out.println(portInterface.getIpAddress().getIPAddressStr());
+            }
+        }
+
+        ethernetNetworkAdapterRouter.removePortInterface(0);
+        //TODO addStaticRoute does not give exception when the port is removed because indexes of ports change.
+        // Hashmap for Port Interfaces?
         router.addStaticRoute(0,new IPv4("3.0.0.0/24"));
         router.addStaticRoute(1,new IPv4("2.0.0.0/24"));
         router.removeStaticRoute(new IPv4("3.0.0.0/24"));
