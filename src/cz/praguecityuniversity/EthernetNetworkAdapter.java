@@ -6,15 +6,20 @@ public class EthernetNetworkAdapter extends NetworkAdapter{
     ArrayList<PortInterface> arrayOfPortInterfaces;
 
 
-    EthernetNetworkAdapter(String deviceName, int numOfPortInterfaces, Device device) {
-        super(deviceName, device);
+    EthernetNetworkAdapter(String deviceName, int numOfPortInterfaces, Device device, TypeofEntity typeofEntity) {
+        super(deviceName, device, typeofEntity);
         this.arrayOfPortInterfaces = new ArrayList<>();
         this.addPortInterface(numOfPortInterfaces);
     }
 
     void addPortInterface(int numOfPortInterfaces){
-        for (int i = 0; i < numOfPortInterfaces; i++){
-            arrayOfPortInterfaces.add(new PortInterface(new CabledConnection(this)));
+        if(typeofEntity.equals(TypeofEntity.COMPUTER)){
+            arrayOfPortInterfaces.add(new PortInterface());
+        }
+        else {
+            for (int i = 0; i < numOfPortInterfaces; i++) {
+                arrayOfPortInterfaces.add(new PortInterface());
+            }
         }
     }
 
@@ -55,16 +60,22 @@ public class EthernetNetworkAdapter extends NetworkAdapter{
 
     @Override
     public Event handleEvent(Event event) {
-        switch (event.typeOfEvent){
-            case ROUTING:
+        switch (event.getPreviousEntity().typeofEntity){
+            case ROUTER:
                 PortInterface correctPortInterface = arrayOfPortInterfaces.get(event.getCorrectPortInterface());
                 event.startingTime += 3;
-                event.typeOfEvent = TypeOfEvent.STANDARD;
-//                correctPortInterface.connection.handleEvent(event);
-            case STANDARD:
+                event.entity = correctPortInterface.getConnection();
+                break;
+            case COMPUTER:
                 event.startingTime += 1;
-//                arrayOfPortInterfaces.get(0).connection.handleEvent(event);
+                event.entity = arrayOfPortInterfaces.get(0).getConnection();
+                break;
+            case CONNECTION:
+                event.entity = device;
+                event.startingTime += 1;
+                break;
         }
+        event.setPreviousEntity(this);
         return event;
     }
 }

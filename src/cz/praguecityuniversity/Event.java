@@ -7,31 +7,37 @@ public class Event {
     int startingTime;
     IPv4 sourceIPAddress;
     IPv4 destinationIPAddress;
-    Device device;
-    TypeOfEvent typeOfEvent;
     private int correctPortInterface;
-
+    private Entity previousEntity;
+    Entity entity;
 
     public Event(String eventName, String data, TypeOfConnection connection,
-                 int startingTime, IPv4 sourceIPAddress, IPv4 destinationIPAddress, Device device, TypeOfEvent typeOfEvent) {
+                 int startingTime, IPv4 sourceIPAddress, IPv4 destinationIPAddress, Entity entity) {
         this.eventName = eventName;
         this.data = data;
         this.connection = connection;
         this.startingTime = startingTime;
         this.sourceIPAddress = sourceIPAddress;
         this.destinationIPAddress = destinationIPAddress;
-        this.device = device;
-        this.typeOfEvent = typeOfEvent;
+        this.entity = entity;
     }
 
     public void setCorrectPortInterface(int correctPortInterface) {
-        if (typeOfEvent.equals(TypeOfEvent.ROUTING)){
+        if (entity.typeofEntity == TypeofEntity.ROUTER){
             this.correctPortInterface = correctPortInterface;
         }
     }
 
     public int getCorrectPortInterface() {
         return correctPortInterface;
+    }
+
+    public Entity getPreviousEntity() {
+        return previousEntity;
+    }
+
+    public void setPreviousEntity(Entity previousEntity) {
+        this.previousEntity = previousEntity;
     }
 }
 
@@ -40,7 +46,7 @@ enum TypeOfConnection {
     ETHERNET
 }
 
-enum TypeOfEvent {
-    ROUTING,
-    STANDARD
-}
+//enum TypeOfEvent {
+//    ROUTING,
+//    STANDARD
+//}
