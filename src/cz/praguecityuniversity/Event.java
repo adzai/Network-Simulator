@@ -45,8 +45,3 @@ enum TypeOfConnection {
     WIRELESS,
     ETHERNET
 }
-
-//enum TypeOfEvent {
-//    ROUTING,
-//    STANDARD
-//}

@@ -1,7 +1,5 @@
 package cz.praguecityuniversity;
 
-import javax.sound.midi.Soundbank;
-import java.util.ArrayList;
 import java.util.Objects;
 
 public class Main {
