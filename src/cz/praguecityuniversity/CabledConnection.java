@@ -14,6 +14,8 @@ public class CabledConnection extends Connection{
     public Event handleEvent(Event event) {
         if(event.getPreviousEntity() == ethernetNetworkAdapter1){
             event.entity = ethernetNetworkAdapter2;
+        } else {
+            event.entity = ethernetNetworkAdapter1;
         }
         event.startingTime += 3;
         event.setPreviousEntity(this);

@@ -16,9 +16,16 @@ public class EventScheduler {
     void next(){
        Event event = eventQueue.poll();
        if (event != null) {
+           System.out.println("Processing event for: " + event.entity.typeofEntity);
            Event newEvent = event.entity.handleEvent(event);
-           this.schedule(newEvent);
+           if (newEvent != null) {
+               this.schedule(newEvent);
+           }
        }
+    }
+
+    boolean isDone() {
+        return eventQueue.size() == 0;
     }
 }
 class EventComparator implements Comparator<Event> {

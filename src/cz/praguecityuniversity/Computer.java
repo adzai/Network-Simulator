@@ -2,6 +2,7 @@ package cz.praguecityuniversity;
 
 public class Computer extends Device {
     EthernetNetworkAdapter ethernetNetworkAdapter;
+
     Computer(String deviceName, EthernetNetworkAdapter ethernetNetworkAdapter,TypeofEntity typeofEntity) {
         super(deviceName,typeofEntity);
         this.ethernetNetworkAdapter = ethernetNetworkAdapter;
@@ -9,6 +10,9 @@ public class Computer extends Device {
 
     @Override
     public Event handleEvent(Event event) {
+        if (event.getPreviousEntity() == ethernetNetworkAdapter) {
+            return null;
+        }
         event.entity = this.ethernetNetworkAdapter;
         event.startingTime = event.startingTime + 3;
         event.setPreviousEntity(this);
