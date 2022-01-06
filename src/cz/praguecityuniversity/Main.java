@@ -44,12 +44,6 @@ public class Main {
         ethernetNetworkAdapterRouter.addIPAddressToPortInterface(0,new IPv4("1.0.0.2/24"));
         ethernetNetworkAdapterRouter.addIPAddressToPortInterface(1,new IPv4("2.0.0.2/24"));
 
-//        for (PortInterface portInterface : ethernetNetworkAdapterRouter.arrayOfPortInterfaces){
-//            if(portInterface.getIpAddress() != null){
-//                System.out.println(portInterface.getIpAddress().getIPAddressStr());
-//            }
-//        }
-
         router.addStaticRoute(0,new IPv4("1.0.0.0/24"));
         router.addStaticRoute(1,new IPv4("2.0.0.0/24"));
 
@@ -101,26 +95,6 @@ public class Main {
         System.out.println("From Cable To Net Adapter of Computer 2:");
         System.out.println(fromNetADOfComp2ToComp2.entity);
         System.out.println(fromNetADOfComp2ToComp2.startingTime);
-
-
-
-
-
-
-
-
-
-
-
-
-//        Event routingEvent = router.handleEvent(eventForRouter);
-//        System.out.println(routingEvent.entity);
-//        System.out.println(routingEvent.startingTime);
-//        System.out.println(routingEvent.getCorrectPortInterface());
-//
-//        Event receivedEvent = ethernetNetworkAdapterRouter.handleEvent(routingEvent);
-//        System.out.println(receivedEvent.entity);
-//        System.out.println(receivedEvent.startingTime);
 
 //        IPv4 ip = new IPv4("1.0.0.1/24");
 //        System.out.println(ip.getIPOctets());
