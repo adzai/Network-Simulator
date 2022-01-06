@@ -2,11 +2,7 @@ package cz.praguecityuniversity;
 
 public class PortInterface {
     private IPv4 ipAddress;
-    CabledConnection connection;
-
-    PortInterface(CabledConnection connection) {
-        this.connection = connection;
-    }
+    private CabledConnection connection;
 
     public IPv4 getIpAddress() {
         return ipAddress;
@@ -14,5 +10,13 @@ public class PortInterface {
 
     public void setIpAddress(IPv4 ipAddress) {
         this.ipAddress = ipAddress;
+    }
+
+    public CabledConnection getConnection() {
+        return connection;
+    }
+
+    public void setConnection(CabledConnection connection) {
+        this.connection = connection;
     }
 }

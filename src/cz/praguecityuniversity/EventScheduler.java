@@ -16,7 +16,7 @@ public class EventScheduler {
     void next(){
        Event event = eventQueue.poll();
        if (event != null) {
-           Event newEvent = event.device.handleEvent(event);
+           Event newEvent = event.entity.handleEvent(event);
            this.schedule(newEvent);
        }
     }
