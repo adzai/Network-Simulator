@@ -4,12 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Router extends Device{
-    EthernetNetworkAdapter ethernetNetworkAdapter;
     HashMap<IPv4, Integer> routingTable = new HashMap<>();
 
-    Router(String deviceName,TypeofEntity typeofEntity, EthernetNetworkAdapter ethernetNetworkAdapter) {
+    Router(String deviceName,TypeofEntity typeofEntity) {
         super(deviceName,typeofEntity);
-        this.ethernetNetworkAdapter = ethernetNetworkAdapter;
     }
 
     public void addStaticRoute(int portInterfaceIndex, IPv4 networkIPAddress) throws InvalidPortInterface, InvalidIPAddress {

@@ -11,11 +11,11 @@ public class Event {
     private Entity previousEntity;
     Entity entity;
 
-    public Event(String eventName, String data, TypeOfConnection connection,
+    public Event(String eventName, String data,
                  int startingTime, IPv4 sourceIPAddress, IPv4 destinationIPAddress, Entity entity) {
         this.eventName = eventName;
         this.data = data;
-        this.connection = connection;
+        this.connection = TypeOfConnection.ETHERNET;
         this.startingTime = startingTime;
         this.sourceIPAddress = sourceIPAddress;
         this.destinationIPAddress = destinationIPAddress;
