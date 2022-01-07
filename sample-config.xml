@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<Topology>
+    <Devices>
+        <Computer>
+            <ID>1</ID>
+            <Name>Computer1</Name>
+            <IP>1.0.0.2/24</IP>
+        </Computer>
+        <Computer>
+            <ID>2</ID>
+            <Name>Computer2</Name>
+            <IP>2.0.0.2/24</IP>
+        </Computer>
+        <Router>
+            <ID>3</ID>
+            <Name>Router1</Name>
+            <Interfaces>
+                <Interface id="0">
+                    <IP>1.0.0.1/24</IP>
+                </Interface>
+                <Interface id="1">
+                    <IP>2.0.0.1/24</IP>
+                </Interface>
+            </Interfaces>
+        </Router>
+    </Devices>
+    <Links>
+        <Link>
+            <SourceID>1</SourceID>
+            <DestID>3</DestID>
+            <SourceInterface>0</SourceInterface>
+            <DestInterface>0</DestInterface>
+        </Link>
+        <Link>
+            <SourceID>2</SourceID>
+            <SourceInterface>0</SourceInterface>
+            <DestID>3</DestID>
+            <DestInterface>1</DestInterface>
+        </Link>
+    </Links>
+    <Events>
+        <Event>
+            <Name>Test event1</Name>
+            <Data>Data123</Data>
+            <StartingTime>1</StartingTime>
+            <SourceDeviceID>1</SourceDeviceID>
+            <SourceDeviceIP>1.0.0.2/24</SourceDeviceIP>
+            <DestDeviceIP>2.0.0.2/24</DestDeviceIP>
+        </Event>
+        <Event>
+            <Name>Test event</Name>
+            <Data>Data456</Data>
+            <StartingTime>2</StartingTime>
+            <SourceDeviceID>2</SourceDeviceID>
+            <SourceDeviceIP>2.0.0.2/24</SourceDeviceIP>
+            <DestDeviceIP>1.0.0.2/24</DestDeviceIP>
+        </Event>
+    </Events>
+</Topology>
