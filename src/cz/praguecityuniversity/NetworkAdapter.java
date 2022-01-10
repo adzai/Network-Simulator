@@ -1,9 +1,9 @@
 package cz.praguecityuniversity;
 
-abstract class NetworkAdapter extends Device implements EventHandler{
+abstract class NetworkAdapter extends Entity{
     Device device;
-    NetworkAdapter(String deviceName, Device device,TypeofEntity typeofEntity) {
-        super(deviceName,typeofEntity);
+    NetworkAdapter(Device device,TypeofEntity typeofEntity) {
+        super(typeofEntity);
         this.device = device;
     }
 }

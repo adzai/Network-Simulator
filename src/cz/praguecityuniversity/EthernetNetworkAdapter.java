@@ -6,8 +6,8 @@ public class EthernetNetworkAdapter extends NetworkAdapter{
     ArrayList<PortInterface> arrayOfPortInterfaces;
 
 
-    EthernetNetworkAdapter(String deviceName, int numOfPortInterfaces, Device device, TypeofEntity typeofEntity) {
-        super(deviceName, device, typeofEntity);
+    EthernetNetworkAdapter(int numOfPortInterfaces, Device device, TypeofEntity typeofEntity) {
+        super(device, typeofEntity);
         this.arrayOfPortInterfaces = new ArrayList<>();
         this.addPortInterface(numOfPortInterfaces);
     }
