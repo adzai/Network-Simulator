@@ -63,7 +63,7 @@ public class Simulation {
                 IPAddress computerIP = IPAddressFactory.getIPAddress(element.getElementsByTagName("IP").item(0).getTextContent());
                 Computer computer = new Computer(computerName,TypeofEntity.COMPUTER);
                 this.addDevice(computerID, computer);
-                EthernetNetworkAdapter ethernetNetworkAdapter = new EthernetNetworkAdapter("EthNetAdapter" + computerName,1,computer,TypeofEntity.NETWORKADAPTER);
+                EthernetNetworkAdapter ethernetNetworkAdapter = new EthernetNetworkAdapter(1,computer,TypeofEntity.NETWORKADAPTER);
                 ethernetNetworkAdapter.addIPAddressToPortInterface(0, computerIP);
                 computer.ethernetNetworkAdapter = ethernetNetworkAdapter;
 
@@ -82,7 +82,7 @@ public class Simulation {
                 Router router = new Router(routerName,TypeofEntity.ROUTER);
                 Integer routerID = Integer.valueOf(element.getElementsByTagName("ID").item(0).getTextContent());
                 this.addDevice(routerID, router);
-                EthernetNetworkAdapter ethernetNetworkAdapter = new EthernetNetworkAdapter("EthNetAdapter" + routerName,
+                EthernetNetworkAdapter ethernetNetworkAdapter = new EthernetNetworkAdapter(
                         5, router,TypeofEntity.NETWORKADAPTER);
                 router.ethernetNetworkAdapter = ethernetNetworkAdapter;
                 parseInterfaces(element.getElementsByTagName("Interface"), ethernetNetworkAdapter, router);
