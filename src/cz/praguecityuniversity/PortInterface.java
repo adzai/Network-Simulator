@@ -1,14 +1,14 @@
 package cz.praguecityuniversity;
 
 public class PortInterface {
-    private IPv4 ipAddress;
+    private IPAddress ipAddress;
     private CabledConnection connection;
 
-    public IPv4 getIpAddress() {
+    public IPAddress getIpAddress() {
         return ipAddress;
     }
 
-    public void setIpAddress(IPv4 ipAddress) {
+    public void setIpAddress(IPAddress ipAddress) {
         this.ipAddress = ipAddress;
     }
 

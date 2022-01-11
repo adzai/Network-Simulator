@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class IPv4 {
+public class IPv4 implements IPAddress {
     private String IPAddressStr;
     private final long IPAddressVal;
     private final String networkAddressStr;
@@ -15,16 +15,16 @@ public class IPv4 {
     private final ArrayList<ArrayList<Integer>> networkOctets;
 
     IPv4(String IPAddressStr) throws InvalidIPAddress, InvalidMask {
-        parseIPAddress(IPAddressStr);
+        parseIPv4Address(IPAddressStr);
         String[] IPAddressArr = this.IPAddressStr.split("\\.");
-        this.IPOctets = getIPOctets(IPAddressArr);
-        this.networkOctets = getNetworkOctets(this.IPOctets, this.mask);
+        this.IPOctets = parseIPOctets(IPAddressArr);
+        this.networkOctets = parseNetworkOctets(this.IPOctets, this.mask);
         this.networkAddressStr = IPOctetsToString(this.networkOctets);
         this.IPAddressVal = this.parseAsVal(this.IPAddressStr);
         this.networkAddressVal = this.parseAsVal(this.networkAddressStr);
     }
 
-    private void parseIPAddress(String IPAddressStr) throws InvalidIPAddress, InvalidMask {
+    private void parseIPv4Address(String IPAddressStr) throws InvalidIPAddress, InvalidMask {
         String[] split = IPAddressStr.split("/");
         if (split.length != 2) {
             throw new InvalidIPAddress("Invalid IP address, given " + IPAddressStr + ", expected format is x.x.x.x/x");
@@ -45,7 +45,7 @@ public class IPv4 {
         this.mask = Integer.parseInt(maskStr);
     }
 
-    private ArrayList<ArrayList<Integer>> getIPOctets(String[] IPAddressArr) {
+    private ArrayList<ArrayList<Integer>> parseIPOctets(String[] IPAddressArr) {
         ArrayList<ArrayList<Integer>> IPOctets = new ArrayList<>();
         for(String IPSliceStr :IPAddressArr) {
             ArrayList<Integer> octet = new ArrayList<>();
@@ -64,7 +64,7 @@ public class IPv4 {
         return IPOctets;
     }
 
-    private ArrayList<ArrayList<Integer>> getNetworkOctets(ArrayList<ArrayList<Integer>> IPOctets, int mask) {
+    private ArrayList<ArrayList<Integer>> parseNetworkOctets(ArrayList<ArrayList<Integer>> IPOctets, int mask) {
         ArrayList<ArrayList<Integer>> networkOctets = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
             ArrayList<Integer> octet = IPOctets.get(i);
