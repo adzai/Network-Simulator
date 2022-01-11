@@ -23,7 +23,7 @@ public class EthernetNetworkAdapter extends NetworkAdapter{
         }
     }
 
-    public void addIPAddressToPortInterface (int portInterfaceIndex, IPv4 IPAddress) throws InvalidPortInterface {
+    public void addIPAddressToPortInterface (int portInterfaceIndex, IPAddress IPAddress) throws InvalidPortInterface {
         if(!arrayOfPortInterfaces.isEmpty() && arrayOfPortInterfaces.get(portInterfaceIndex) != null){
             for(PortInterface portInterface : arrayOfPortInterfaces){
                 if(portInterface.getIpAddress() != null &&

@@ -38,7 +38,7 @@ public class Simulation {
     }
 
     // TODO actually load devices and events from a config file
-    void loadFromCFG(String filename) throws InvalidMask, InvalidIPAddress, InvalidPortInterface, IOException, SAXException, ParserConfigurationException {
+    void loadFromCFG(String filename) throws InvalidMask, InvalidIPAddress, InvalidPortInterface, IOException, SAXException, ParserConfigurationException, IPVersionNotRecognized, NotImplemented {
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         dbf.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
         DocumentBuilder db = dbf.newDocumentBuilder();
@@ -51,7 +51,7 @@ public class Simulation {
         parseEvents(doc);
     }
 
-    void parseComputers(Document doc) throws InvalidMask, InvalidIPAddress, InvalidPortInterface {
+    void parseComputers(Document doc) throws InvalidMask, InvalidIPAddress, InvalidPortInterface, IPVersionNotRecognized, NotImplemented {
         NodeList list = doc.getElementsByTagName("Computer");
         for (int i = 0; i < list.getLength(); i++) {
             Node node = list.item(i);
@@ -60,7 +60,7 @@ public class Simulation {
                 Element element = (Element) node;
                 String computerName = element.getElementsByTagName("Name").item(0).getTextContent();
                 Integer computerID = Integer.valueOf(element.getElementsByTagName("ID").item(0).getTextContent());
-                IPv4 computerIP = new IPv4(element.getElementsByTagName("IP").item(0).getTextContent());
+                IPAddress computerIP = IPAddressFactory.getIPAddress(element.getElementsByTagName("IP").item(0).getTextContent());
                 Computer computer = new Computer(computerName,TypeofEntity.COMPUTER);
                 this.addDevice(computerID, computer);
                 EthernetNetworkAdapter ethernetNetworkAdapter = new EthernetNetworkAdapter(1,computer,TypeofEntity.NETWORKADAPTER);
@@ -71,7 +71,7 @@ public class Simulation {
         }
     }
 
-    void parseRouters(Document doc) throws InvalidPortInterface, InvalidMask, InvalidIPAddress {
+    void parseRouters(Document doc) throws InvalidPortInterface, InvalidMask, InvalidIPAddress, IPVersionNotRecognized, NotImplemented {
         NodeList list = doc.getElementsByTagName("Router");
         for (int i = 0; i < list.getLength(); i++) {
             Node node = list.item(i);
@@ -90,15 +90,15 @@ public class Simulation {
         }
     }
 
-    void parseInterfaces(NodeList interfaces, EthernetNetworkAdapter ethernetNetworkAdapter, Router router) throws InvalidMask, InvalidIPAddress, InvalidPortInterface {
+    void parseInterfaces(NodeList interfaces, EthernetNetworkAdapter ethernetNetworkAdapter, Router router) throws InvalidMask, InvalidIPAddress, InvalidPortInterface, IPVersionNotRecognized, NotImplemented {
         for (int i = 0; i < interfaces.getLength(); i++) {
             Node node = interfaces.item(i);
             if (node.getNodeType() == Node.ELEMENT_NODE) {
                 Element element = (Element) node;
                 int interfaceID = Integer.parseInt(element.getAttribute("id"));
-                IPv4 ip = new IPv4(element.getElementsByTagName("IP").item(0).getTextContent());
+                IPAddress ip = IPAddressFactory.getIPAddress(element.getElementsByTagName("IP").item(0).getTextContent());
                 ethernetNetworkAdapter.addIPAddressToPortInterface(interfaceID, ip);
-                router.addStaticRoute(interfaceID, new IPv4(ip.getNetworkAddressStr() + "/" + ip.getMask()));
+                router.addStaticRoute(interfaceID, IPAddressFactory.getIPAddress(ip.getNetworkAddressStr() + "/" + ip.getMask()));
             }
         }
     }
@@ -123,7 +123,7 @@ public class Simulation {
         }
     }
 
-    void parseEvents(Document doc) throws InvalidMask, InvalidIPAddress {
+    void parseEvents(Document doc) throws InvalidMask, InvalidIPAddress, IPVersionNotRecognized, NotImplemented {
         NodeList list = doc.getElementsByTagName("Event");
         for (int i = 0; i < list.getLength(); i++) {
             Node node = list.item(i);
@@ -132,10 +132,11 @@ public class Simulation {
                 String eventName = element.getElementsByTagName("Name").item(0).getTextContent();
                 String data = element.getElementsByTagName("Data").item(0).getTextContent();
                 Integer sourceDeviceID = Integer.valueOf(element.getElementsByTagName("SourceDeviceID").item(0).getTextContent());
-                IPv4 sourceIP = new IPv4(element.getElementsByTagName("SourceDeviceIP").item(0).getTextContent());
-                IPv4 destIP = new IPv4(element.getElementsByTagName("DestDeviceIP").item(0).getTextContent());
+                IPAddress sourceIP = IPAddressFactory.getIPAddress(element.getElementsByTagName("SourceDeviceIP").item(0).getTextContent());
+                IPAddress destIP = IPAddressFactory.getIPAddress(element.getElementsByTagName("DestDeviceIP").item(0).getTextContent());
+                Message message = new Message(sourceIP, destIP, data);
                 int startingTime = Integer.parseInt(element.getElementsByTagName("StartingTime").item(0).getTextContent());
-                Event event = new Event(eventName, data, startingTime, sourceIP, destIP, this.getDevice(sourceDeviceID));
+                Event event = new Event(eventName, message, startingTime, this.getDevice(sourceDeviceID));
                 this.eventScheduler.schedule(event);
             }
         }

@@ -4,19 +4,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Router extends Device{
-    HashMap<IPv4, Integer> routingTable = new HashMap<>();
+    HashMap<IPAddress, Integer> routingTable = new HashMap<>();
 
     Router(String deviceName,TypeofEntity typeofEntity) {
         super(deviceName,typeofEntity);
     }
 
-    public void addStaticRoute(int portInterfaceIndex, IPv4 networkIPAddress) throws InvalidPortInterface, InvalidIPAddress {
+    public void addStaticRoute(int portInterfaceIndex, IPAddress networkIPAddress) throws InvalidPortInterface, InvalidIPAddress {
         ArrayList<PortInterface> arrayOfPortInterfaces = ethernetNetworkAdapter.arrayOfPortInterfaces;
         boolean IPAddressIsUsed = false;
 
         if(!arrayOfPortInterfaces.isEmpty() && arrayOfPortInterfaces.get(portInterfaceIndex) != null){
             if(!routingTable.isEmpty()){
-                for (IPv4 IPAddress : routingTable.keySet()){
+                for (IPAddress IPAddress : routingTable.keySet()){
                     if (IPAddress.getNetworkAddressVal() == networkIPAddress.getNetworkAddressVal()){
                         IPAddressIsUsed = true;
                         break;
@@ -41,10 +41,10 @@ public class Router extends Device{
         }
     }
 
-    public void removeStaticRoute(IPv4 networkIPAddress) throws InvalidIPAddress, EmptyRoutingTable {
+    public void removeStaticRoute(IPAddress networkIPAddress) throws InvalidIPAddress, EmptyRoutingTable {
         boolean routeRemoved = false;
         if(!routingTable.isEmpty()) {
-            for (IPv4 IPAddress : routingTable.keySet()) {
+            for (IPAddress IPAddress : routingTable.keySet()) {
                 if (IPAddress.getNetworkAddressVal() == networkIPAddress.getNetworkAddressVal()) {
                     routingTable.remove(IPAddress);
                     routeRemoved = true;
@@ -62,11 +62,11 @@ public class Router extends Device{
     }
 
 
-    public int getCorrectPortInterface(IPv4 destinationIPAddress) throws RouteNotFound {
+    public int getCorrectPortInterface(IPAddress destinationIPAddress) throws RouteNotFound {
         int correctPortInterface = -1;
 
         long destNetIPAddressVal = destinationIPAddress.getNetworkAddressVal();
-        for (IPv4 networkIPAddress : routingTable.keySet()){
+        for (IPAddress networkIPAddress : routingTable.keySet()){
             long networkIPAddressVal = networkIPAddress.getNetworkAddressVal();
             if (networkIPAddressVal == destNetIPAddressVal){
                 correctPortInterface = routingTable.get(networkIPAddress);
@@ -82,7 +82,7 @@ public class Router extends Device{
     public Event handleEvent(Event event) {
         int correctPortInterface = -1;
         try {
-            correctPortInterface = getCorrectPortInterface(event.destinationIPAddress);
+            correctPortInterface = getCorrectPortInterface(event.message.getDestinationIP());
         } catch (RouteNotFound routeNotFound) {
             routeNotFound.printStackTrace();
         }

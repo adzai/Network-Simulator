@@ -1,35 +1,36 @@
 package cz.praguecityuniversity;
 
+enum TypeOfConnection {
+    WIRELESS,
+    ETHERNET
+}
+
 public class Event {
     String eventName;
     String data;
-    TypeOfConnection connection;
     int startingTime;
-    IPv4 sourceIPAddress;
-    IPv4 destinationIPAddress;
+    Message message;
+    IPAddress sourceIPAddress;
+    IPAddress destinationIPAddress;
+    Entity entity;
     private int correctPortInterface;
     private Entity previousEntity;
-    Entity entity;
 
-    public Event(String eventName, String data,
-                 int startingTime, IPv4 sourceIPAddress, IPv4 destinationIPAddress, Entity entity) {
+    public Event(String eventName, Message message, int startingTime, Entity entity) {
         this.eventName = eventName;
-        this.data = data;
-        this.connection = TypeOfConnection.ETHERNET;
         this.startingTime = startingTime;
-        this.sourceIPAddress = sourceIPAddress;
-        this.destinationIPAddress = destinationIPAddress;
+        this.message = message;
         this.entity = entity;
-    }
-
-    public void setCorrectPortInterface(int correctPortInterface) {
-        if (entity.typeofEntity == TypeofEntity.ROUTER){
-            this.correctPortInterface = correctPortInterface;
-        }
     }
 
     public int getCorrectPortInterface() {
         return correctPortInterface;
+    }
+
+    public void setCorrectPortInterface(int correctPortInterface) {
+        if (entity.typeofEntity == TypeofEntity.ROUTER) {
+            this.correctPortInterface = correctPortInterface;
+        }
     }
 
     public Entity getPreviousEntity() {
@@ -39,9 +40,4 @@ public class Event {
     public void setPreviousEntity(Entity previousEntity) {
         this.previousEntity = previousEntity;
     }
-}
-
-enum TypeOfConnection {
-    WIRELESS,
-    ETHERNET
 }
