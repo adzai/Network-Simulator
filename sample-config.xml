@@ -2,17 +2,17 @@
 <Topology>
     <Devices>
         <Computer>
-            <ID>1</ID>
+            <MAC>15-20-32-4n-55-6a</MAC>
             <Name>Computer1</Name>
             <IP>1.0.0.2/24</IP>
         </Computer>
         <Computer>
-            <ID>2</ID>
+            <MAC>10-12-3b-40-5f-6a</MAC>
             <Name>Computer2</Name>
             <IP>2.0.0.2/24</IP>
         </Computer>
         <Router>
-            <ID>3</ID>
+            <MAC>11-3n-3d-45-5a-6m</MAC>
             <Name>Router1</Name>
             <Interfaces>
                 <Interface id="0">
@@ -26,15 +26,15 @@
     </Devices>
     <Links>
         <Link>
-            <SourceID>1</SourceID>
-            <DestID>3</DestID>
+            <SourceMAC>15-20-32-4n-55-6a</SourceMAC>
+            <DestMAC>11-3n-3d-45-5a-6m</DestMAC>
             <SourceInterface>0</SourceInterface>
             <DestInterface>0</DestInterface>
         </Link>
         <Link>
-            <SourceID>2</SourceID>
+            <SourceMAC>10-12-3b-40-5f-6a</SourceMAC>
             <SourceInterface>0</SourceInterface>
-            <DestID>3</DestID>
+            <DestMAC>11-3n-3d-45-5a-6m</DestMAC>
             <DestInterface>1</DestInterface>
         </Link>
     </Links>
@@ -44,7 +44,7 @@
             <Type>message</Type>
             <Data>Data123</Data>
             <StartingTime>1</StartingTime>
-            <SourceDeviceID>1</SourceDeviceID>
+            <SourceDeviceMAC>15-20-32-4n-55-6a</SourceDeviceMAC>
             <SourceDeviceIP>1.0.0.2/24</SourceDeviceIP>
             <DestDeviceIP>2.0.0.2/24</DestDeviceIP>
         </Event>
@@ -53,7 +53,7 @@
             <Type>message</Type>
             <Data>Data456</Data>
             <StartingTime>2</StartingTime>
-            <SourceDeviceID>2</SourceDeviceID>
+            <SourceDeviceMAC>10-12-3b-40-5f-6a</SourceDeviceMAC>
             <SourceDeviceIP>2.0.0.2/24</SourceDeviceIP>
             <DestDeviceIP>1.0.0.2/24</DestDeviceIP>
         </Event>
@@ -62,7 +62,7 @@
             <Type>message</Type>
             <Data>Data789</Data>
             <StartingTime>4</StartingTime>
-            <SourceDeviceID>1</SourceDeviceID>
+            <SourceDeviceMAC>15-20-32-4n-55-6a</SourceDeviceMAC>
             <SourceDeviceIP>1.0.0.2/24</SourceDeviceIP>
             <DestDeviceIP>1.0.0.1/24</DestDeviceIP>
         </Event>
@@ -71,7 +71,7 @@
             <Type>ping</Type>
             <Data>pong</Data>
             <StartingTime>20</StartingTime>
-            <SourceDeviceID>1</SourceDeviceID>
+            <SourceDeviceMAC>15-20-32-4n-55-6a</SourceDeviceMAC>
             <SourceDeviceIP>1.0.0.2/24</SourceDeviceIP>
             <DestDeviceIP>1.0.0.1/24</DestDeviceIP>
         </Event>
@@ -80,7 +80,7 @@
             <Type>ping</Type>
             <Data>pong</Data>
             <StartingTime>40</StartingTime>
-            <SourceDeviceID>3</SourceDeviceID>
+            <SourceDeviceMAC>11-3n-3d-45-5a-6m</SourceDeviceMAC>
             <SourceDeviceIP>1.0.0.1/24</SourceDeviceIP>
             <DestDeviceIP>1.0.0.2/24</DestDeviceIP>
         </Event>

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 public class EthernetNetworkAdapter extends NetworkAdapter{
     ArrayList<PortInterface> arrayOfPortInterfaces;
 
-
     EthernetNetworkAdapter(int numOfPortInterfaces, Device device, TypeofEntity typeofEntity) {
         super(device, typeofEntity);
         this.arrayOfPortInterfaces = new ArrayList<>();

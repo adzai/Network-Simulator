@@ -2,8 +2,8 @@ package cz.praguecityuniversity;
 
 public class Computer extends Device {
 
-    Computer(String deviceName, TypeofEntity typeofEntity) {
-        super(deviceName, typeofEntity);
+    Computer(String deviceName, TypeofEntity typeofEntity, String macAddress) {
+        super(deviceName, typeofEntity, macAddress);
     }
 
     @Override
