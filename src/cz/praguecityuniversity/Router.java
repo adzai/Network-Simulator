@@ -6,8 +6,8 @@ import java.util.HashMap;
 public class Router extends Device{
     HashMap<IPAddress, Integer> routingTable = new HashMap<>();
 
-    Router(String deviceName,TypeofEntity typeofEntity) {
-        super(deviceName,typeofEntity);
+    Router(String deviceName,TypeofEntity typeofEntity,String macAddress) {
+        super(deviceName,typeofEntity,macAddress);
     }
 
     public void addStaticRoute(int portInterfaceIndex, IPAddress networkIPAddress) throws InvalidPortInterface, InvalidIPAddress {
@@ -82,7 +82,7 @@ public class Router extends Device{
     public Event handleEvent(Event event) {
         int correctPortInterface = -1;
         try {
-            correctPortInterface = getCorrectPortInterface(event.message.getDestinationIP());
+            correctPortInterface = getCorrectPortInterface(event.frame.message.getDestinationIP());
         } catch (RouteNotFound routeNotFound) {
             routeNotFound.printStackTrace();
         }

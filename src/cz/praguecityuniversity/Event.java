@@ -7,19 +7,16 @@ enum TypeOfConnection {
 
 public class Event {
     String eventName;
-    String data;
     int startingTime;
-    Message message;
-    IPAddress sourceIPAddress;
-    IPAddress destinationIPAddress;
+    Frame frame;
     Entity entity;
     private int correctPortInterface;
     private Entity previousEntity;
 
-    public Event(String eventName, Message message, int startingTime, Entity entity) {
+    public Event(String eventName, Frame frame, int startingTime, Entity entity) {
         this.eventName = eventName;
         this.startingTime = startingTime;
-        this.message = message;
+        this.frame = frame;
         this.entity = entity;
     }
 
