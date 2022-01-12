@@ -80,6 +80,12 @@ public class Router extends Device{
 
     @Override
     public Event handleEvent(Event event) {
+        try {
+            event = this.processFinalEvent(event);
+        } catch (EventFinished e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
         int correctPortInterface = -1;
         try {
             correctPortInterface = getCorrectPortInterface(event.message.getDestinationIP());

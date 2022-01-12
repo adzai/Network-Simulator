@@ -12,6 +12,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.HashMap;
 
 public class Simulation {
@@ -134,7 +135,13 @@ public class Simulation {
                 Integer sourceDeviceID = Integer.valueOf(element.getElementsByTagName("SourceDeviceID").item(0).getTextContent());
                 IPAddress sourceIP = IPAddressFactory.getIPAddress(element.getElementsByTagName("SourceDeviceIP").item(0).getTextContent());
                 IPAddress destIP = IPAddressFactory.getIPAddress(element.getElementsByTagName("DestDeviceIP").item(0).getTextContent());
-                Message message = new Message(sourceIP, destIP, data);
+                TypeOfMessage typeOfMessage;
+                if ("ping".equals(element.getElementsByTagName("Type").item(0).getTextContent())) {
+                    typeOfMessage = TypeOfMessage.PING;
+                } else {
+                    typeOfMessage = TypeOfMessage.MESSAGE;
+                }
+                Message message = new Message(sourceIP, destIP, data, typeOfMessage);
                 int startingTime = Integer.parseInt(element.getElementsByTagName("StartingTime").item(0).getTextContent());
                 Event event = new Event(eventName, message, startingTime, this.getDevice(sourceDeviceID));
                 this.eventScheduler.schedule(event);
