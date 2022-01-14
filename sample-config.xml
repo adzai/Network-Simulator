@@ -41,6 +41,7 @@
     <Events>
         <Event>
             <Name>Test event1</Name>
+            <Type>message</Type>
             <Data>Data123</Data>
             <StartingTime>1</StartingTime>
             <SourceDeviceMAC>15-20-32-4n-55-6a</SourceDeviceMAC>
@@ -49,10 +50,38 @@
         </Event>
         <Event>
             <Name>Test event</Name>
+            <Type>message</Type>
             <Data>Data456</Data>
             <StartingTime>2</StartingTime>
             <SourceDeviceMAC>10-12-3b-40-5f-6a</SourceDeviceMAC>
             <SourceDeviceIP>2.0.0.2/24</SourceDeviceIP>
+            <DestDeviceIP>1.0.0.2/24</DestDeviceIP>
+        </Event>
+        <Event>
+            <Name>Test router event</Name>
+            <Type>message</Type>
+            <Data>Data789</Data>
+            <StartingTime>4</StartingTime>
+            <SourceDeviceMAC>15-20-32-4n-55-6a</SourceDeviceMAC>
+            <SourceDeviceIP>1.0.0.2/24</SourceDeviceIP>
+            <DestDeviceIP>1.0.0.1/24</DestDeviceIP>
+        </Event>
+        <Event>
+            <Name>Test router ping</Name>
+            <Type>ping</Type>
+            <Data>pong</Data>
+            <StartingTime>20</StartingTime>
+            <SourceDeviceMAC>15-20-32-4n-55-6a</SourceDeviceMAC>
+            <SourceDeviceIP>1.0.0.2/24</SourceDeviceIP>
+            <DestDeviceIP>1.0.0.1/24</DestDeviceIP>
+        </Event>
+        <Event>
+            <Name>Test computer ping</Name>
+            <Type>ping</Type>
+            <Data>pong</Data>
+            <StartingTime>40</StartingTime>
+            <SourceDeviceMAC>11-3n-3d-45-5a-6m</SourceDeviceMAC>
+            <SourceDeviceIP>1.0.0.1/24</SourceDeviceIP>
             <DestDeviceIP>1.0.0.2/24</DestDeviceIP>
         </Event>
     </Events>

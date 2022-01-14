@@ -59,23 +59,33 @@ public class EthernetNetworkAdapter extends NetworkAdapter{
 
     @Override
     public Event handleEvent(Event event) {
-        switch (event.getPreviousEntity().typeofEntity){
-            case ROUTER:
+        switch (event.getPreviousEntity().typeofEntity) {
+            case ROUTER -> {
                 PortInterface correctPortInterface = arrayOfPortInterfaces.get(event.getCorrectPortInterface());
                 event.startingTime += 3;
                 event.entity = correctPortInterface.getConnection();
-                break;
-            case COMPUTER:
+            }
+            case COMPUTER -> {
                 event.startingTime += 1;
                 event.entity = arrayOfPortInterfaces.get(0).getConnection();
-                break;
-            case CONNECTION:
+            }
+            case CONNECTION -> {
                 event.entity = device;
                 event.startingTime += 1;
-                break;
+            }
         }
         event.setPreviousEntity(this);
         return event;
+    }
+
+    public boolean containsIP(IPAddress IPAddress) {
+       for (PortInterface portInterface : arrayOfPortInterfaces) {
+           IPAddress portInterfaceIP = portInterface.getIpAddress();
+            if (portInterfaceIP != null && portInterfaceIP.getIPAddressStr().equals(IPAddress.getIPAddressStr())) {
+                return true;
+            }
+       }
+       return false;
     }
 }
 

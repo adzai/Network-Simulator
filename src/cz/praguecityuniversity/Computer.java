@@ -8,9 +8,10 @@ public class Computer extends Device {
 
     @Override
     public Event handleEvent(Event event) {
-        if (event.getPreviousEntity() == ethernetNetworkAdapter) {
-            System.out.println(this.deviceName + " received data: " + event.frame.message.getData() +
-                    " from IP: " + event.frame.message.getSourceIP().getIPAddressStr());
+        try {
+            event = this.processFinalEvent(event);
+        } catch (EventFinished e) {
+            System.out.println(e.getMessage());
             return null;
         }
         event.entity = this.ethernetNetworkAdapter;
