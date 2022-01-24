@@ -5,9 +5,11 @@ import java.util.PriorityQueue;
 
 public class EventScheduler {
     PriorityQueue<Event> eventQueue;
+    private final EventLogger logger;
 
-    EventScheduler() {
+    EventScheduler(EventLogger logger) {
         eventQueue = new PriorityQueue<>(new EventComparator());
+        this.logger = logger;
     }
 
     void schedule(Event event){
@@ -16,8 +18,14 @@ public class EventScheduler {
     void next(){
        Event event = eventQueue.poll();
        if (event != null) {
-           System.out.println("Processing event for: " + event.entity.typeofEntity);
-           Event newEvent = event.entity.handleEvent(event);
+           logger.log(event);
+           Event newEvent;
+           try {
+               newEvent = event.getEntity().handleEvent(event, logger);
+           } catch (EventFinished e) {
+               logger.logInfo(event.getStartingTime(), e.getMessage());
+               newEvent = null;
+           }
            if (newEvent != null) {
                this.schedule(newEvent);
            }
@@ -30,9 +38,9 @@ public class EventScheduler {
 }
 class EventComparator implements Comparator<Event> {
     public int compare(Event e1, Event e2) {
-        if (e1.startingTime > e2.startingTime)
+        if (e1.getStartingTime() > e2.getStartingTime())
             return 1;
-        else if (e1.startingTime < e2.startingTime)
+        else if (e1.getStartingTime() < e2.getStartingTime())
             return -1;
         return 0;
     }

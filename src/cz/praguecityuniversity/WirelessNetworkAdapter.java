@@ -7,7 +7,7 @@ public class WirelessNetworkAdapter extends NetworkAdapter{
     }
 
     @Override
-    public Event handleEvent(Event event) {
+    public Event handleEvent(Event event, EventLogger logger) {
 
         return event;
     }

@@ -16,9 +16,11 @@ import java.util.HashMap;
 
 public class Simulation {
     final EventScheduler eventScheduler;
+    final EventLogger logger;
     HashMap<String, Device> devices;
-    Simulation() {
-        this.eventScheduler = new EventScheduler();
+    Simulation(EventLogger logger) {
+        this.logger = logger;
+        this.eventScheduler = new EventScheduler(logger);
         this.devices = new HashMap<>();
     }
 

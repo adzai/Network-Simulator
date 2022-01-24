@@ -6,7 +6,7 @@ public class WirelessConnection extends Connection{
     }
 
     @Override
-    public Event handleEvent(Event event) {
+    public Event handleEvent(Event event, EventLogger logger) {
         return event;
     }
 }

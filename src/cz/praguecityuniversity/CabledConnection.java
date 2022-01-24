@@ -11,13 +11,13 @@ public class CabledConnection extends Connection{
         this.ethernetNetworkAdapter2 = ethernetNetworkAdapter2;
     }
     @Override
-    public Event handleEvent(Event event) {
+    public Event handleEvent(Event event, EventLogger logger) {
         if(event.getPreviousEntity() == ethernetNetworkAdapter1){
-            event.entity = ethernetNetworkAdapter2;
+            event.setEntity(ethernetNetworkAdapter2);
         } else {
-            event.entity = ethernetNetworkAdapter1;
+            event.setEntity(ethernetNetworkAdapter1);
         }
-        event.startingTime += 3;
+        event.setStartingTime(event.getStartingTime() + 3);
         event.setPreviousEntity(this);
         return event;
     }
