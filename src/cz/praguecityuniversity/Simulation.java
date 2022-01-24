@@ -93,7 +93,8 @@ public class Simulation {
                 ethernetNetworkAdapter.addIPAddressToPortInterface(interfaceID, ip);
                 IPProtocol IPProtocol = device.getIPProtocol();
                 if (device.typeofEntity == TypeofEntity.ROUTER){
-                    IPProtocol.addStaticRoute(interfaceID, IPAddressFactory.getIPAddress(ip.getNetworkAddressStr() + "/" + ip.getMask()),device.ethernetNetworkAdapter);                }
+                    String assignedNetwork = element.getElementsByTagName("AssignedNetworkIP").item(0).getTextContent();
+                    IPProtocol.addStaticRoute(interfaceID, IPAddressFactory.getIPAddress(assignedNetwork),device.ethernetNetworkAdapter);                }
             }
         }
     }

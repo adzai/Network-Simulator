@@ -21,9 +21,11 @@
             <Interfaces>
                 <Interface id="0">
                     <IP>1.0.0.1/24</IP>
+                    <AssignedNetworkIP>1.0.0.0/24</AssignedNetworkIP>
                 </Interface>
                 <Interface id="1">
                     <IP>2.0.0.1/24</IP>
+                    <AssignedNetworkIP>2.0.0.0/24</AssignedNetworkIP>
                 </Interface>
             </Interfaces>
         </Router>
