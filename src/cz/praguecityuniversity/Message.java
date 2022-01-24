@@ -1,7 +1,7 @@
 package cz.praguecityuniversity;
 
 abstract public class Message {
-    private final String data;
+    private String data;
 
     public Message(String data) {
         this.data = data;
@@ -20,5 +20,9 @@ abstract public class Message {
 
     public String getData(){
         return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
     }
 }

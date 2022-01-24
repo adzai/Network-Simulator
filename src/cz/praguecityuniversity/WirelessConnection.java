@@ -1,8 +1,8 @@
 package cz.praguecityuniversity;
 
 public class WirelessConnection extends Connection{
-    public WirelessConnection(TypeofEntity typeofEntity) {
-        super(typeofEntity);
+    public WirelessConnection() {
+        super();
     }
 
     @Override
