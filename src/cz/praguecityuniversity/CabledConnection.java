@@ -4,9 +4,7 @@ public class CabledConnection extends Connection{
     EthernetNetworkAdapter ethernetNetworkAdapter1;
     EthernetNetworkAdapter ethernetNetworkAdapter2;
     CabledConnection(EthernetNetworkAdapter ethernetNetworkAdapter1,
-                     EthernetNetworkAdapter ethernetNetworkAdapter2,
-                     TypeofEntity typeofEntity) {
-        super(typeofEntity);
+                     EthernetNetworkAdapter ethernetNetworkAdapter2) {
         this.ethernetNetworkAdapter1 = ethernetNetworkAdapter1;
         this.ethernetNetworkAdapter2 = ethernetNetworkAdapter2;
     }

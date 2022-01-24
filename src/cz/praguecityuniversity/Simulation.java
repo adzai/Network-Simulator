@@ -111,7 +111,7 @@ public class Simulation {
                 EthernetNetworkAdapter ethernetNetworkAdapter1 = this.getDevice(sourceMAC).ethernetNetworkAdapter;
                 EthernetNetworkAdapter ethernetNetworkAdapter2 = this.getDevice(destMAC).ethernetNetworkAdapter;
                 CabledConnection cabledConnection = new CabledConnection(
-                        ethernetNetworkAdapter1, ethernetNetworkAdapter2, TypeofEntity.CONNECTION);
+                        ethernetNetworkAdapter1, ethernetNetworkAdapter2);
                 ethernetNetworkAdapter1.arrayOfPortInterfaces.get(sourceInterface).setConnection(cabledConnection);
                 ethernetNetworkAdapter2.arrayOfPortInterfaces.get(destInterface).setConnection(cabledConnection);
             }
