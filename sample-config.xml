@@ -4,12 +4,16 @@
         <Computer>
             <MAC>15-20-32-4n-55-6a</MAC>
             <Name>Computer1</Name>
-            <IP>1.0.0.2/24</IP>
+            <Interface id="0">
+                <IP>1.0.0.2/24</IP>
+            </Interface>
         </Computer>
         <Computer>
             <MAC>10-12-3b-40-5f-6a</MAC>
             <Name>Computer2</Name>
-            <IP>2.0.0.2/24</IP>
+            <Interface id="0">
+                <IP>2.0.0.2/24</IP>
+            </Interface>
         </Computer>
         <Router>
             <MAC>11-3n-3d-45-5a-6m</MAC>
