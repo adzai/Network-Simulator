@@ -10,10 +10,10 @@ public class EventLogger {
 
     public void log(Event event) {
         Message message = event.getFrame().getMessage();
-        String eventString = "[" + event.getStartingTime() + "] Event name: " + event.getEventName() + " Entity: " +
-                event.getEntity() + " Previous Entity: " + event.getPreviousEntity() + "\n";
-        String messageString = "Message type: " + message.getTypeOfMessage() + " Source IP: " + message.getSourceIP() +
-                " Destination IP: " + message.getDestinationIP() + " Data: " + message.getData();
+        String eventString = "[" + event.getStartingTime() + "] Event name: " + event.getEventName() + ", Entity: " +
+                event.getEntity().typeofEntity + " (" + event.getEntity() + ")" + ", Previous Entity: " + event.getPreviousEntity() + "\n";
+        String messageString = "Message type: " + message.getTypeOfMessage() + ", Source IP: " + message.getSourceIP().getIPAddressStr() +
+                ", Destination IP: " + message.getDestinationIP().getIPAddressStr() + ", Data: " + message.getData();
         loggedEvents.add(eventString + messageString);
     }
 

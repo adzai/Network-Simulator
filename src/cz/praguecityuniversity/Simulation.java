@@ -91,7 +91,9 @@ public class Simulation {
                 int interfaceID = Integer.parseInt(element.getAttribute("id"));
                 IPAddress ip = IPAddressFactory.getIPAddress(element.getElementsByTagName("IP").item(0).getTextContent());
                 ethernetNetworkAdapter.addIPAddressToPortInterface(interfaceID, ip);
-                device.addStaticRoute(interfaceID, IPAddressFactory.getIPAddress(ip.getNetworkAddressStr() + "/" + ip.getMask()));
+                IPProtocol IPProtocol = device.getIPProtocol();
+                if (device.typeofEntity == TypeofEntity.ROUTER){
+                    IPProtocol.addStaticRoute(interfaceID, IPAddressFactory.getIPAddress(ip.getNetworkAddressStr() + "/" + ip.getMask()),device.ethernetNetworkAdapter);                }
             }
         }
     }
