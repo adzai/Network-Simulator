@@ -7,15 +7,10 @@ public class Computer extends Device {
     }
 
     @Override
-    public Event handleEvent(Event event) {
-        try {
-            event = this.processFinalEvent(event);
-        } catch (EventFinished e) {
-            System.out.println(e.getMessage());
-            return null;
-        }
-        event.entity = this.ethernetNetworkAdapter;
-        event.startingTime = event.startingTime + 3;
+    public Event handleEvent(Event event, EventLogger logger) throws EventFinished {
+        event = this.processFinalEvent(event, logger);
+        event.setEntity(this.ethernetNetworkAdapter);
+        event.setStartingTime(event.getStartingTime() + 3);
         event.setPreviousEntity(this);
         return event;
     }

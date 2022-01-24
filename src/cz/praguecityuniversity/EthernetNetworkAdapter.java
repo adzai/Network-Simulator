@@ -58,20 +58,20 @@ public class EthernetNetworkAdapter extends NetworkAdapter{
     }
 
     @Override
-    public Event handleEvent(Event event) {
+    public Event handleEvent(Event event, EventLogger logger) {
         switch (event.getPreviousEntity().typeofEntity) {
             case ROUTER -> {
                 PortInterface correctPortInterface = arrayOfPortInterfaces.get(event.getCorrectPortInterface());
-                event.startingTime += 3;
-                event.entity = correctPortInterface.getConnection();
+                event.setStartingTime(event.getStartingTime() +  3);
+                event.setEntity(correctPortInterface.getConnection());
             }
             case COMPUTER -> {
-                event.startingTime += 1;
-                event.entity = arrayOfPortInterfaces.get(0).getConnection();
+                event.setStartingTime(event.getStartingTime() + 1);
+                event.setEntity(arrayOfPortInterfaces.get(0).getConnection());
             }
             case CONNECTION -> {
-                event.entity = device;
-                event.startingTime += 1;
+                event.setEntity(device);
+                event.setStartingTime(event.getStartingTime() + 1);
             }
         }
         event.setPreviousEntity(this);

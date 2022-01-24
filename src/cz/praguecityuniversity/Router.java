@@ -79,22 +79,18 @@ public class Router extends Device{
     }
 
     @Override
-    public Event handleEvent(Event event) {
-        try {
-            event = this.processFinalEvent(event);
-        } catch (EventFinished e) {
-            System.out.println(e.getMessage());
-            return null;
-        }
+    public Event handleEvent(Event event, EventLogger logger) throws EventFinished {
+        event = this.processFinalEvent(event, logger);
         int correctPortInterface = -1;
         try {
-            correctPortInterface = getCorrectPortInterface(event.frame.message.getDestinationIP());
+            correctPortInterface = getCorrectPortInterface(event.getFrame().getMessage().getDestinationIP());
         } catch (RouteNotFound routeNotFound) {
             routeNotFound.printStackTrace();
         }
         event.setCorrectPortInterface(correctPortInterface);
-        event.entity = ethernetNetworkAdapter;
-        event.startingTime += 5;
+        logger.logInfo(event.getStartingTime(), "Chosen port interface: " + event.getCorrectPortInterface());
+        event.setEntity(ethernetNetworkAdapter);
+        event.setStartingTime(event.getStartingTime() + 5);
         event.setPreviousEntity(this);
         return event;
     }

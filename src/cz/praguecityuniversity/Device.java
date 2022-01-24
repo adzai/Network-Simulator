@@ -12,16 +12,16 @@ public abstract class Device extends Entity{
         this.macAddress = macAddress;
     }
 
-    public Event processFinalEvent(Event event) throws EventFinished {
-        if (this.ethernetNetworkAdapter.containsIP(event.frame.message.getDestinationIP())) {
-            if (event.frame.message.getTypeOfMessage() == TypeOfMessage.PING) {
-                System.out.println(this.deviceName + " received ping from IP: " + event.frame.message.getSourceIP().getIPAddressStr());
-                event.frame.message.setTypeOfMessage(TypeOfMessage.MESSAGE);
-                event.frame.message.setDestinationIP(event.frame.message.getSourceIP());
-                event.frame.message.setSourceIP(event.frame.message.getDestinationIP());
+    public Event processFinalEvent(Event event, EventLogger logger) throws EventFinished {
+        if (this.ethernetNetworkAdapter.containsIP(event.getFrame().getMessage().getDestinationIP())) {
+            if (event.getFrame().getMessage().getTypeOfMessage() == TypeOfMessage.PING) {
+                logger.logInfo(event.getStartingTime(), this.deviceName + " received ping from IP: " + event.getFrame().getMessage().getSourceIP().getIPAddressStr());
+                event.getFrame().getMessage().setTypeOfMessage(TypeOfMessage.MESSAGE);
+                event.getFrame().getMessage().setDestinationIP(event.getFrame().getMessage().getSourceIP());
+                event.getFrame().getMessage().setSourceIP(event.getFrame().getMessage().getDestinationIP());
             } else {
-                System.out.println(this.deviceName + " received data: " + event.frame.message.getData() + " from IP: " + event.frame.message.getSourceIP().getIPAddressStr());
-                throw new EventFinished("Event \"" + event.eventName + "\" finished at time: " + event.startingTime);
+                logger.logInfo(event.getStartingTime(), this.deviceName + " received data: " + event.getFrame().getMessage().getData() + " from IP: " + event.getFrame().getMessage().getSourceIP().getIPAddressStr());
+                throw new EventFinished("Event \"" + event.getEventName() + "\" finished at time: " + event.getStartingTime());
             }
         }
         return event;
