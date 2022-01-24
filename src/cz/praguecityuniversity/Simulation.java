@@ -142,7 +142,7 @@ public class Simulation {
                 } else {
                     typeOfMessage = TypeOfMessage.MESSAGE;
                 }
-                Message message = new Message(sourceIP, destIP, data, typeOfMessage);
+                Message message = new IPMessage(data,typeOfMessage,sourceIP, destIP);
                 Frame frame = new Frame(sourceDeviceMAC,"FF:FF:FF:FF",message);
                 int startingTime = Integer.parseInt(element.getElementsByTagName("StartingTime").item(0).getTextContent());
                 Event event = new Event(eventName, frame, startingTime, this.getDevice(sourceDeviceMAC));

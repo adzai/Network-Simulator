@@ -1,47 +1,24 @@
 package cz.praguecityuniversity;
 
-public class Message {
-    private IPAddress sourceIP;
-    private IPAddress destinationIP;
+abstract public class Message {
     private final String data;
-    private TypeOfMessage typeOfMessage;
 
-    public Message(IPAddress sourceIP, IPAddress destinationIP, String data, cz.praguecityuniversity.TypeOfMessage typeOfMessage) {
-        this.sourceIP = sourceIP;
-        this.destinationIP = destinationIP;
+    public Message(String data) {
         this.data = data;
-        this.typeOfMessage = typeOfMessage;
     }
+    public abstract IPAddress getSourceIP();
 
-    public IPAddress getSourceIP() {
-        return sourceIP;
-    }
+    public abstract void setSourceIP(IPAddress sourceIP);
 
-    public void setSourceIP(IPAddress IP) {
-        this.sourceIP = IP;
-    }
+    public abstract IPAddress getDestinationIP();
 
-    public IPAddress getDestinationIP() {
-        return destinationIP;
-    }
+    public abstract void setDestinationIP(IPAddress destinationIP);
 
-    public void setDestinationIP(IPAddress IP) {
-        this.destinationIP = IP;
-    }
+    public abstract TypeOfMessage getTypeOfMessage();
 
-    public String getData() {
+    public abstract void setTypeOfMessage(TypeOfMessage typeOfMessage);
+
+    public String getData(){
         return data;
     }
-
-    public TypeOfMessage getTypeOfMessage() {
-        return typeOfMessage;
-    }
-    public void setTypeOfMessage(TypeOfMessage typeOfMessage) {
-        this.typeOfMessage = typeOfMessage;
-    }
-}
-
-enum TypeOfMessage {
-  PING,
-  MESSAGE
 }

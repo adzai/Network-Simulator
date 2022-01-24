@@ -89,7 +89,7 @@ public class Router extends Device{
         }
         event.setCorrectPortInterface(correctPortInterface);
         logger.logInfo(event.getStartingTime(), "Chosen port interface: " + event.getCorrectPortInterface());
-        event.setEntity(ethernetNetworkAdapter);
+        event.setEntity(this.getNetworkAdapter());
         event.setStartingTime(event.getStartingTime() + 5);
         event.setPreviousEntity(this);
         return event;
