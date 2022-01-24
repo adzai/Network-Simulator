@@ -3,12 +3,14 @@ package cz.praguecityuniversity;
 public abstract class Device extends Entity{
     String deviceName;
     EthernetNetworkAdapter ethernetNetworkAdapter;
+    WirelessNetworkAdapter wirelessNetworkAdapter;
     String macAddress;
 
     Device(String deviceName, TypeofEntity typeofEntity,String macAddress) {
         super(typeofEntity);
         this.deviceName = deviceName;
         this.ethernetNetworkAdapter = null;
+        this.wirelessNetworkAdapter = null;
         this.macAddress = macAddress;
     }
 
@@ -25,5 +27,14 @@ public abstract class Device extends Entity{
             }
         }
         return event;
+    }
+
+    public NetworkAdapter getNetworkAdapter() {
+        for(PortInterface portInterface:ethernetNetworkAdapter.arrayOfPortInterfaces){
+            if (portInterface.getConnection() != null){
+                return ethernetNetworkAdapter;
+            }
+        }
+        return wirelessNetworkAdapter;
     }
 }
