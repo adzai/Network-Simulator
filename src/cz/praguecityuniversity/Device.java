@@ -6,6 +6,7 @@ import java.util.HashMap;
 public class Device extends Entity{
     String deviceName;
     EthernetNetworkAdapter ethernetNetworkAdapter;
+    WirelessNetworkAdapter wirelessNetworkAdapter;
     String macAddress;
     HashMap<IPAddress, Integer> routingTable;
     private IPProtocol IPProtocol;
@@ -14,6 +15,7 @@ public class Device extends Entity{
         super(typeofEntity);
         this.deviceName = deviceName;
         this.ethernetNetworkAdapter = null;
+        this.wirelessNetworkAdapter = null;
         this.macAddress = macAddress;
         this.IPProtocol = IPProtocol;
         this.routingTable = routingTable;
@@ -119,5 +121,13 @@ public class Device extends Entity{
         event.setStartingTime(event.getStartingTime() + 5);
         event.setPreviousEntity(this);
         return event;
+    }
+    public NetworkAdapter getNetworkAdapter() {
+        for(PortInterface portInterface:ethernetNetworkAdapter.arrayOfPortInterfaces){
+            if (portInterface.getConnection() != null){
+                return ethernetNetworkAdapter;
+            }
+        }
+        return wirelessNetworkAdapter;
     }
 }
