@@ -1,6 +1,6 @@
 package cz.praguecityuniversity;
 
-public class WirelessConnection extends Connection{
+public class WirelessConnection extends Connection {
     public WirelessConnection() {
         super();
     }

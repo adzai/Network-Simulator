@@ -7,21 +7,20 @@ public class IPProtocol {
     HashMap<IPAddress, Integer> routingTable;
     TypeofEntity typeofEntity;
 
-    public IPProtocol(TypeofEntity typeofEntity){
+    public IPProtocol(TypeofEntity typeofEntity) {
         this.typeofEntity = typeofEntity;
         this.createRoutingTable();
     }
 
-    public void createRoutingTable(){
-        if (typeofEntity == TypeofEntity.COMPUTER){
+    public void createRoutingTable() {
+        if (typeofEntity == TypeofEntity.COMPUTER) {
             routingTable = null;
-        }
-        else {
+        } else {
             routingTable = new HashMap<>();
         }
     }
 
-    public void addStaticRoute(int portInterfaceIndex, IPAddress networkIPAddress,EthernetNetworkAdapter ethernetNetworkAdapter) throws InvalidPortInterface, InvalidIPAddress {
+    public void addStaticRoute(int portInterfaceIndex, IPAddress networkIPAddress, EthernetNetworkAdapter ethernetNetworkAdapter) throws InvalidPortInterface, InvalidIPAddress {
         ArrayList<PortInterface> arrayOfPortInterfaces = ethernetNetworkAdapter.arrayOfPortInterfaces;
 
         if (!arrayOfPortInterfaces.isEmpty() && arrayOfPortInterfaces.get(portInterfaceIndex) != null) {
@@ -56,8 +55,8 @@ public class IPProtocol {
     }
 
 
-    public int getCorrectPortInterface(IPAddress destinationIPAddress,Device device) throws RouteNotFound {
-        if (device.typeofEntity == TypeofEntity.COMPUTER){
+    public int getCorrectPortInterface(IPAddress destinationIPAddress, Device device) throws RouteNotFound {
+        if (device.typeofEntity == TypeofEntity.COMPUTER) {
             return 0;
         }
 
@@ -81,7 +80,7 @@ public class IPProtocol {
     }
 
 
-    public Event processFinalEvent(Event event, EventLogger logger,Device device) throws EventFinished {
+    public Event processFinalEvent(Event event, EventLogger logger, Device device) throws EventFinished {
         if (device.ethernetNetworkAdapter.containsIP(event.getFrame().getMessage().getDestinationIP())) {
             if (event.getFrame().getMessage().getTypeOfMessage() == TypeOfMessage.PING) {
                 logger.logInfo(event.getStartingTime(), device.deviceName + " received ping from IP: " + event.getFrame().getMessage().getSourceIP().getIPAddressStr());

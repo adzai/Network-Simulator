@@ -61,9 +61,11 @@ public class Event {
     public void setFrame(Frame frame) {
         this.frame = frame;
     }
+
     public Entity getEntity() {
         return entity;
     }
+
     public void setEntity(Entity entity) {
         this.entity = entity;
     }

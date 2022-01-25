@@ -1,6 +1,6 @@
 package cz.praguecityuniversity;
 
-public class IPMessage extends Message{
+public class IPMessage extends Message {
     private IPAddress sourceIP;
     private IPAddress destinationIP;
     private TypeOfMessage typeOfMessage;
