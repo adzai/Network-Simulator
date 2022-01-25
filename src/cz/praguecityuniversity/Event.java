@@ -1,10 +1,5 @@
 package cz.praguecityuniversity;
 
-enum TypeOfConnection {
-    WIRELESS,
-    ETHERNET
-}
-
 public class Event {
     private String eventName;
     private int startingTime;

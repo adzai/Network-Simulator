@@ -12,7 +12,7 @@
             <MAC>10-12-3b-40-5f-6a</MAC>
             <Name>Computer2</Name>
             <Interface id="0">
-                <IP>2.0.0.2/24</IP>
+                <IP>3.0.0.2/24</IP>
             </Interface>
         </Computer>
         <Router>
@@ -24,6 +24,24 @@
                 </Interface>
                 <Interface id="1">
                     <IP>2.0.0.1/24</IP>
+                    <StaticRoutes>
+                        <StaticRoute>3.0.0.0/24</StaticRoute>
+                    </StaticRoutes>
+                </Interface>
+            </Interfaces>
+        </Router>
+        <Router>
+            <MAC>10-3n-3d-45-5a-6m</MAC>
+            <Name>Router2</Name>
+            <Interfaces>
+                <Interface id="0">
+                    <IP>2.0.0.2/24</IP>
+                    <StaticRoutes>
+                        <StaticRoute>1.0.0.0/24</StaticRoute>
+                    </StaticRoutes>
+                </Interface>
+                <Interface id="1">
+                    <IP>3.0.0.1/24</IP>
                 </Interface>
             </Interfaces>
         </Router>
@@ -38,27 +56,33 @@
         <Link>
             <SourceMAC>10-12-3b-40-5f-6a</SourceMAC>
             <SourceInterface>0</SourceInterface>
+            <DestMAC>10-3n-3d-45-5a-6m</DestMAC>
+            <DestInterface>1</DestInterface>
+        </Link>
+        <Link>
+            <SourceMAC>10-3n-3d-45-5a-6m</SourceMAC>
+            <SourceInterface>0</SourceInterface>
             <DestMAC>11-3n-3d-45-5a-6m</DestMAC>
             <DestInterface>1</DestInterface>
         </Link>
     </Links>
     <Events>
         <Event>
-            <Name>Test event1</Name>
+            <Name>Event from Computer 1 to Computer 2</Name>
             <Type>message</Type>
             <Data>Data123</Data>
             <StartingTime>1</StartingTime>
             <SourceDeviceMAC>15-20-32-4n-55-6a</SourceDeviceMAC>
             <SourceDeviceIP>1.0.0.2/24</SourceDeviceIP>
-            <DestDeviceIP>2.0.0.2/24</DestDeviceIP>
+            <DestDeviceIP>3.0.0.2/24</DestDeviceIP>
         </Event>
         <Event>
-            <Name>Test event</Name>
+            <Name>Event from Computer 2 to Computer 1</Name>
             <Type>message</Type>
             <Data>Data456</Data>
             <StartingTime>2</StartingTime>
             <SourceDeviceMAC>10-12-3b-40-5f-6a</SourceDeviceMAC>
-            <SourceDeviceIP>2.0.0.2/24</SourceDeviceIP>
+            <SourceDeviceIP>3.0.0.2/24</SourceDeviceIP>
             <DestDeviceIP>1.0.0.2/24</DestDeviceIP>
         </Event>
         <Event>

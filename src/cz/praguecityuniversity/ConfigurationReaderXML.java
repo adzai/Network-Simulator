@@ -75,6 +75,12 @@ public class ConfigurationReaderXML implements ConfigurationReader {
                 IPProtocol IPProtocol = device.getIPProtocol();
                 if (device.typeofEntity == TypeofEntity.ROUTER) {
                     IPProtocol.addStaticRoute(interfaceID, IPAddressFactory.getIPAddress(ip.getNetworkAddressStr() + "/" + ip.getMask()), device.ethernetNetworkAdapter);
+                    NodeList staticRoutes = element.getElementsByTagName("StaticRoute");
+                    for (int index = 0; index < staticRoutes.getLength(); index++) {
+                        Node staticRouteNode = staticRoutes.item(index);
+                        String staticRouteString = staticRouteNode.getTextContent();
+                        IPProtocol.addStaticRoute(interfaceID, IPAddressFactory.getIPAddress(staticRouteString), device.ethernetNetworkAdapter);
+                    }
                 }
             }
         }
