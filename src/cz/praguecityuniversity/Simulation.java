@@ -9,7 +9,7 @@ public class Simulation {
 
     Simulation(EventLogger logger) {
         this.logger = logger;
-        this.eventScheduler = new EventScheduler(logger);
+        this.eventScheduler = EventScheduler.getInstance(logger);
     }
 
     /**

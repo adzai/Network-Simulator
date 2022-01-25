@@ -10,10 +10,20 @@ import java.util.PriorityQueue;
 public class EventScheduler {
     PriorityQueue<Event> eventQueue;
     private final EventLogger logger;
+    private static EventScheduler eventSchedulerInstance = null;
 
-    EventScheduler(EventLogger logger) {
+    private EventScheduler(EventLogger logger) {
         eventQueue = new PriorityQueue<>(new EventComparator());
         this.logger = logger;
+    }
+
+    public static EventScheduler getInstance(EventLogger logger) {
+        {
+            if (eventSchedulerInstance == null)
+                eventSchedulerInstance = new EventScheduler(logger);
+
+            return eventSchedulerInstance;
+        }
     }
 
     /**
