@@ -2,6 +2,10 @@ package cz.praguecityuniversity;
 
 public class Main {
 
+    /**
+     * Initializes and runs the simulation.
+     * @param args Accepts configuration file name as the first argument.
+     */
     public static void main(String[] args) {
         String configFileName;
         if (args.length == 1) {

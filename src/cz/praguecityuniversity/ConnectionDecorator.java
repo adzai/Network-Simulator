@@ -1,5 +1,8 @@
 package cz.praguecityuniversity;
 
+/**
+ * Allows for decorating of connections.
+ */
 public class ConnectionDecorator extends Connection {
     protected Connection connection;
 
