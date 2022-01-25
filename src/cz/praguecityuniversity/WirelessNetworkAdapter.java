@@ -1,9 +1,9 @@
 package cz.praguecityuniversity;
 
-public class WirelessNetworkAdapter extends NetworkAdapter{
+public class WirelessNetworkAdapter extends NetworkAdapter {
 
-    WirelessNetworkAdapter(Device device,TypeofEntity typeofEntity) {
-        super(device,typeofEntity);
+    WirelessNetworkAdapter(Device device, TypeofEntity typeofEntity) {
+        super(device, typeofEntity);
     }
 
     @Override

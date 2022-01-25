@@ -47,7 +47,7 @@ public class IPv4 implements IPAddress {
 
     private ArrayList<ArrayList<Integer>> parseIPOctets(String[] IPAddressArr) {
         ArrayList<ArrayList<Integer>> IPOctets = new ArrayList<>();
-        for(String IPSliceStr :IPAddressArr) {
+        for (String IPSliceStr : IPAddressArr) {
             ArrayList<Integer> octet = new ArrayList<>();
             String binary = Integer.toBinaryString(Integer.parseInt(IPSliceStr));
             for (int j = 0; j < binary.length(); j++) {
@@ -73,8 +73,7 @@ public class IPv4 implements IPAddress {
                 int ipBit = octet.get(j);
                 if (mask == 0) {
                     networkOctet.add(0);
-                }
-                else {
+                } else {
                     networkOctet.add(ipBit);
                     mask -= 1;
                 }
@@ -86,15 +85,16 @@ public class IPv4 implements IPAddress {
 
     private String IPOctetsToString(ArrayList<ArrayList<Integer>> octets) {
         ArrayList<String> octetStrings = new ArrayList<>();
-        for (ArrayList<Integer> octet: octets) {
+        for (ArrayList<Integer> octet : octets) {
             StringBuilder octetString = new StringBuilder();
-            for (Integer num: octet) {
+            for (Integer num : octet) {
                 octetString.append(num);
             }
             octetStrings.add(Integer.toString(Integer.parseInt(String.valueOf(octetString), 2)));
         }
         return String.join(".", octetStrings);
     }
+
     private long parseAsVal(String IPAddressStr) {
         long IPAddressVal = 0;
         int shiftValue = 24;

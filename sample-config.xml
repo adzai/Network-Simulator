@@ -30,7 +30,6 @@
                 </Interface>
             </Interfaces>
         </Router>
-
         <Router>
             <MAC>10-3n-3d-45-5a-6m</MAC>
             <Name>Router2</Name>

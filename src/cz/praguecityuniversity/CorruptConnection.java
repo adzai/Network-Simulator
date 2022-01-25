@@ -7,7 +7,7 @@ public class CorruptConnection extends ConnectionDecorator {
 
     @Override
     public Event handleEvent(Event event, EventLogger logger) throws EventFinished {
-        Event processedEvent =  super.handleEvent(event, logger);
+        Event processedEvent = super.handleEvent(event, logger);
         processedEvent.getFrame().getMessage().setData("CORRUPTED");
         return processedEvent;
     }

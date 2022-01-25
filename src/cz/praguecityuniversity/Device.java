@@ -1,13 +1,13 @@
 package cz.praguecityuniversity;
 
-public class Device extends Entity{
+public class Device extends Entity {
     String deviceName;
     EthernetNetworkAdapter ethernetNetworkAdapter;
     WirelessNetworkAdapter wirelessNetworkAdapter;
     String macAddress;
-    private IPProtocol IPProtocol;
+    private final IPProtocol IPProtocol;
 
-    Device(String deviceName, TypeofEntity typeofEntity,String macAddress, IPProtocol IPProtocol) {
+    Device(String deviceName, TypeofEntity typeofEntity, String macAddress, IPProtocol IPProtocol) {
         super(typeofEntity);
         this.deviceName = deviceName;
         this.ethernetNetworkAdapter = null;
@@ -21,8 +21,8 @@ public class Device extends Entity{
     }
 
     public NetworkAdapter getNetworkAdapter(Device device) {
-        for(PortInterface portInterface: device.ethernetNetworkAdapter.arrayOfPortInterfaces){
-            if (portInterface.getConnection() != null){
+        for (PortInterface portInterface : device.ethernetNetworkAdapter.arrayOfPortInterfaces) {
+            if (portInterface.getConnection() != null) {
                 return device.ethernetNetworkAdapter;
             }
         }
@@ -31,10 +31,10 @@ public class Device extends Entity{
 
     @Override
     public Event handleEvent(Event event, EventLogger logger) throws EventFinished {
-        event = IPProtocol.processFinalEvent(event, logger,this);
+        event = IPProtocol.processFinalEvent(event, logger, this);
         int correctPortInterface = -1;
         try {
-            correctPortInterface = IPProtocol.getCorrectPortInterface(event.getFrame().getMessage().getDestinationIP(),this);
+            correctPortInterface = IPProtocol.getCorrectPortInterface(event.getFrame().getMessage().getDestinationIP(), this);
         } catch (RouteNotFound routeNotFound) {
             routeNotFound.printStackTrace();
         }

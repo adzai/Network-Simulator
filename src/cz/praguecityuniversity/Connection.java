@@ -1,8 +1,9 @@
 package cz.praguecityuniversity;
 
-abstract public class Connection extends Entity{
+abstract public class Connection extends Entity {
     private int corruptionChance = 15; // percentage chance
     private int dropChance = 15; // percentage chance
+
     public Connection() {
         super(TypeofEntity.CONNECTION);
     }
@@ -10,6 +11,7 @@ abstract public class Connection extends Entity{
     public int getCorruptionChance() {
         return corruptionChance;
     }
+
     public void setCorruptionChance(int chance) {
         this.corruptionChance = chance;
     }
