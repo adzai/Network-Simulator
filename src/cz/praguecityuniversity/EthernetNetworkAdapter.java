@@ -80,7 +80,6 @@ public class EthernetNetworkAdapter extends NetworkAdapter {
      * @param event Event
      * @param logger Logger for logging information related to event handling
      * @return Returns handled event
-     * @throws EventFinished Thrown when the event is finished on the device
      */
     @Override
     public Event handleEvent(Event event, EventLogger logger) {
