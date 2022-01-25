@@ -1,5 +1,9 @@
 package cz.praguecityuniversity;
 
+/**
+ * Abstract class Message for differentiating messages
+ */
+
 abstract public class Message {
     private String data;
 

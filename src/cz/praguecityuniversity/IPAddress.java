@@ -1,5 +1,8 @@
 package cz.praguecityuniversity;
 
+/**
+ * Interface allowing for multiple IP protocols.
+ */
 public interface IPAddress {
     String getIPAddressStr();
 

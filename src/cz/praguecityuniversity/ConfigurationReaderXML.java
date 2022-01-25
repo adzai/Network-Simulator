@@ -14,6 +14,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 
+/**
+ * Configuration reader for XML files.
+ */
 public class ConfigurationReaderXML implements ConfigurationReader {
     HashMap<String, Device> devices;
 
@@ -21,6 +24,10 @@ public class ConfigurationReaderXML implements ConfigurationReader {
         this.devices = new HashMap<>();
     }
 
+    /**
+     * @param fileName Path to config file.
+     * @param eventScheduler Event scheduler that will schedule parsed events.
+     */
     @Override
     public void readConfig(String fileName, EventScheduler eventScheduler) throws ParserConfigurationException, IOException, SAXException, InvalidPortInterface, InvalidMask, InvalidIPAddress, NotImplemented, IPVersionNotRecognized {
 
@@ -34,6 +41,10 @@ public class ConfigurationReaderXML implements ConfigurationReader {
         parseEvents(doc, eventScheduler);
     }
 
+    /**
+     * Parses routers and computers from the XML file.
+     * @param doc XML document.
+     */
     void parseDevices(Document doc) throws InvalidPortInterface, InvalidMask, InvalidIPAddress, IPVersionNotRecognized, NotImplemented {
         NodeList routerList = doc.getElementsByTagName("Router");
         NodeList computerList = doc.getElementsByTagName("Computer");
@@ -41,6 +52,11 @@ public class ConfigurationReaderXML implements ConfigurationReader {
         addDevices(computerList, TypeofEntity.COMPUTER);
     }
 
+    /**
+     * Adds devices to the hash map of devices.
+     * @param listOfDevices List of parsed devices.
+     * @param typeofEntity ROUTER of COMPUTER type.
+     */
     void addDevices(NodeList listOfDevices, TypeofEntity typeofEntity) throws InvalidPortInterface, InvalidMask, InvalidIPAddress, NotImplemented, IPVersionNotRecognized {
         for (int i = 0; i < listOfDevices.getLength(); i++) {
             Node node = listOfDevices.item(i);
@@ -64,6 +80,12 @@ public class ConfigurationReaderXML implements ConfigurationReader {
         }
     }
 
+    /**
+     * Adds IP addresses to port interfaces and adds static routes if they are defined.
+     * @param interfaces List of parsed interfaces.
+     * @param ethernetNetworkAdapter Network adapter of current device.
+     * @param device Current device.
+     */
     void parseInterfaces(NodeList interfaces, EthernetNetworkAdapter ethernetNetworkAdapter, Device device) throws InvalidMask, InvalidIPAddress, InvalidPortInterface, IPVersionNotRecognized, NotImplemented {
         for (int i = 0; i < interfaces.getLength(); i++) {
             Node node = interfaces.item(i);
@@ -86,6 +108,10 @@ public class ConfigurationReaderXML implements ConfigurationReader {
         }
     }
 
+    /**
+     * Connects devices based on defined links.
+     * @param doc XML document.
+     */
     void parseLinks(Document doc) {
         NodeList list = doc.getElementsByTagName("Link");
         for (int i = 0; i < list.getLength(); i++) {
@@ -106,6 +132,11 @@ public class ConfigurationReaderXML implements ConfigurationReader {
         }
     }
 
+    /**
+     * Parses events and schedules them with event scheduler.
+     * @param doc XML document.
+     * @param eventScheduler Event scheduler for scheduling parsed events.
+     */
     void parseEvents(Document doc, EventScheduler eventScheduler) throws InvalidMask, InvalidIPAddress, IPVersionNotRecognized, NotImplemented {
         NodeList list = doc.getElementsByTagName("Event");
         for (int i = 0; i < list.getLength(); i++) {

@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * IPv4 implementation.
+ */
 public class IPv4 implements IPAddress {
     private String IPAddressStr;
     private final long IPAddressVal;
@@ -24,6 +27,13 @@ public class IPv4 implements IPAddress {
         this.networkAddressVal = this.parseAsVal(this.networkAddressStr);
     }
 
+    /**
+     * Parses provided IP string with a mask and if it is in the correct format, extracts the
+     * mask and the IP string.
+     * @param IPAddressStr IP string with a mask in the format of X.X.X.X/X
+     * @throws InvalidIPAddress Thrown when an invalid IP address is provided.
+     * @throws InvalidMask Thrown when an invalid IP mask is provided.
+     */
     private void parseIPv4Address(String IPAddressStr) throws InvalidIPAddress, InvalidMask {
         String[] split = IPAddressStr.split("/");
         if (split.length != 2) {
@@ -45,6 +55,11 @@ public class IPv4 implements IPAddress {
         this.mask = Integer.parseInt(maskStr);
     }
 
+    /**
+     *
+     * @param IPAddressArr Array of IP string split on ".".
+     * @return IP octets
+     */
     private ArrayList<ArrayList<Integer>> parseIPOctets(String[] IPAddressArr) {
         ArrayList<ArrayList<Integer>> IPOctets = new ArrayList<>();
         for (String IPSliceStr : IPAddressArr) {
@@ -64,6 +79,12 @@ public class IPv4 implements IPAddress {
         return IPOctets;
     }
 
+    /**
+     *
+     * @param IPOctets Array of IP octets.
+     * @param mask Mask string.
+     * @return Array of network octets.
+     */
     private ArrayList<ArrayList<Integer>> parseNetworkOctets(ArrayList<ArrayList<Integer>> IPOctets, int mask) {
         ArrayList<ArrayList<Integer>> networkOctets = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
@@ -83,6 +104,11 @@ public class IPv4 implements IPAddress {
         return networkOctets;
     }
 
+    /**
+     *
+     * @param octets Array of IP octets.
+     * @return IP string without mask.
+     */
     private String IPOctetsToString(ArrayList<ArrayList<Integer>> octets) {
         ArrayList<String> octetStrings = new ArrayList<>();
         for (ArrayList<Integer> octet : octets) {
@@ -95,6 +121,11 @@ public class IPv4 implements IPAddress {
         return String.join(".", octetStrings);
     }
 
+    /**
+     *
+     * @param IPAddressStr IP string without mask.
+     * @return Integer value of an IP address.
+     */
     private long parseAsVal(String IPAddressStr) {
         long IPAddressVal = 0;
         int shiftValue = 24;

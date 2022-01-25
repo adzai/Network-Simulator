@@ -3,6 +3,10 @@ package cz.praguecityuniversity;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * Responsible for routing events
+ */
+
 public class IPProtocol {
     HashMap<IPAddress, Integer> routingTable;
     TypeofEntity typeofEntity;
@@ -12,6 +16,10 @@ public class IPProtocol {
         this.createRoutingTable();
     }
 
+    /**
+     * Defines routing table as an empty hashmap for router.
+     * For computer, the routing table is set to null, i.e., it's disabled.
+     */
     public void createRoutingTable() {
         if (typeofEntity == TypeofEntity.COMPUTER) {
             routingTable = null;
@@ -20,6 +28,15 @@ public class IPProtocol {
         }
     }
 
+    /**
+     * Adds static route to the routing table.
+     * The static route is a mapping of network IP address with port interface index.
+     * @param portInterfaceIndex Index of port interface from the array of port interfaces
+     * @param networkIPAddress IP address of the network
+     * @param ethernetNetworkAdapter Ethernet network adapter of the device
+     * @throws InvalidPortInterface Thrown when the given port interface is not defined on the device.
+     * @throws InvalidIPAddress Thrown when the given network IP address is already assigned to another port.
+     */
     public void addStaticRoute(int portInterfaceIndex, IPAddress networkIPAddress, EthernetNetworkAdapter ethernetNetworkAdapter) throws InvalidPortInterface, InvalidIPAddress {
         ArrayList<PortInterface> arrayOfPortInterfaces = ethernetNetworkAdapter.arrayOfPortInterfaces;
 
@@ -37,6 +54,12 @@ public class IPProtocol {
         }
     }
 
+    /**
+     * Removes static route from routing table.
+     * @param networkIPAddress Network IP address of the route to be removed.
+     * @throws InvalidIPAddress Thrown when the given network IP address is not in routing table.
+     * @throws EmptyRoutingTable Thrown when the routing table is empty.
+     */
     public void removeStaticRoute(IPAddress networkIPAddress) throws InvalidIPAddress, EmptyRoutingTable {
         if (routingTable != null) {
             if (!routingTable.isEmpty()) {
@@ -54,7 +77,14 @@ public class IPProtocol {
         }
     }
 
-
+    /**
+     * Does routing and gets correct port interface index for redirecting event.
+     * @param destinationIPAddress IP address of the end device
+     * @param device Device on which the routing is done
+     * @return Returns 0 if the device is computer,
+     * otherwise returns the corresponding port interface index of the router.
+     * @throws RouteNotFound Thrown when the given destination IP address is not found in the routing table.
+     */
     public int getCorrectPortInterface(IPAddress destinationIPAddress, Device device) throws RouteNotFound {
         if (device.typeofEntity == TypeofEntity.COMPUTER) {
             return 0;
@@ -79,7 +109,16 @@ public class IPProtocol {
         return correctPortInterface;
     }
 
-
+    /**
+     * Checks if the event message is a ping or a regular message.
+     * If it's a ping the message is received by the device and redirected to the source device,
+     * otherwise the message is received and the event ends.
+     * @param event Event
+     * @param logger Logger for logging information related to event processing
+     * @param device Device on which the event is processed
+     * @return Returns processed event.
+     * @throws EventFinished Thrown when the event is finished.
+     */
     public Event processFinalEvent(Event event, EventLogger logger, Device device) throws EventFinished {
         if (device.ethernetNetworkAdapter.containsIP(event.getFrame().getMessage().getDestinationIP())) {
             if (event.getFrame().getMessage().getTypeOfMessage() == TypeOfMessage.PING) {
