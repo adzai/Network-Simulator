@@ -12,6 +12,7 @@ public class CabledConnection extends Connection {
                      EthernetNetworkAdapter ethernetNetworkAdapter2) {
         this.ethernetNetworkAdapter1 = ethernetNetworkAdapter1;
         this.ethernetNetworkAdapter2 = ethernetNetworkAdapter2;
+        this.setBandwidth(4);
     }
 
     /**
@@ -28,7 +29,7 @@ public class CabledConnection extends Connection {
         } else {
             event.setEntity(ethernetNetworkAdapter1);
         }
-        event.setStartingTime(event.getStartingTime() + 3);
+        event.setStartingTime(event.getStartingTime() + this.getBandwidth());
         event.setPreviousEntity(this);
         return event;
     }
