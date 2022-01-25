@@ -2,6 +2,10 @@ package cz.praguecityuniversity;
 
 import java.util.ArrayList;
 
+/**
+ * Ethernet Network Adapter of the Device
+ */
+
 public class EthernetNetworkAdapter extends NetworkAdapter {
     ArrayList<PortInterface> arrayOfPortInterfaces;
 
@@ -11,6 +15,10 @@ public class EthernetNetworkAdapter extends NetworkAdapter {
         this.addPortInterface(numOfPortInterfaces);
     }
 
+    /**
+     * Adds provided number of port interfaces on the ethernet network adapter
+     * @param numOfPortInterfaces Provided number of interfaces to be defined
+     */
     void addPortInterface(int numOfPortInterfaces) {
         if (typeofEntity.equals(TypeofEntity.COMPUTER)) {
             arrayOfPortInterfaces.add(new PortInterface());
@@ -21,6 +29,13 @@ public class EthernetNetworkAdapter extends NetworkAdapter {
         }
     }
 
+    /**
+     * Assigns IP address to the port interface index
+     * @param portInterfaceIndex Index of port interface from the array of port interfaces
+     * @param IPAddress IP address to be assigned
+     * @throws InvalidPortInterface Thrown when provided port interface index is not defined on the ethernet network adapter
+     * or when the port index is already assigned with another IP address
+     */
     public void addIPAddressToPortInterface(int portInterfaceIndex, IPAddress IPAddress) throws InvalidPortInterface {
         if (!arrayOfPortInterfaces.isEmpty() && arrayOfPortInterfaces.get(portInterfaceIndex) != null) {
             for (PortInterface portInterface : arrayOfPortInterfaces) {
@@ -39,6 +54,12 @@ public class EthernetNetworkAdapter extends NetworkAdapter {
         }
     }
 
+    /**
+     * Removes assigned IP address from the port interface index
+     * @param portInterfaceIndex Index of port interface from the array of port interfaces
+     * @throws InvalidPortInterface Thrown when an IP address is not assigned to any of the port interfaces
+     * or when the port is not defined.
+     */
     public void removeIPAddressFromPortInterface(int portInterfaceIndex) throws InvalidPortInterface {
         if (!arrayOfPortInterfaces.isEmpty() && arrayOfPortInterfaces.get(portInterfaceIndex) != null) {
             if (arrayOfPortInterfaces.get(portInterfaceIndex).getIpAddress() != null) {
@@ -52,6 +73,15 @@ public class EthernetNetworkAdapter extends NetworkAdapter {
         }
     }
 
+    /**
+     * Redirects event to a cabled connection through the retrieved correct port interface when the previous entity is a router or computer.
+     * When the previous entity is connection, the event is sent to the device on which the ethernet network adapter is defined.
+     * Also, it adds delay simulating passing of time.
+     * @param event Event
+     * @param logger Logger for logging information related to event handling
+     * @return Returns handled event
+     * @throws EventFinished Thrown when the event is finished on the device
+     */
     @Override
     public Event handleEvent(Event event, EventLogger logger) {
         switch (event.getPreviousEntity().typeofEntity) {

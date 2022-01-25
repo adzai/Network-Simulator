@@ -1,5 +1,9 @@
 package cz.praguecityuniversity;
 
+/**
+ * Layer 2 frame that has a header containing source and destination MAC addresses
+ * and a message.
+ */
 public class Frame {
     private final String sourceMAC;
     private final String destinationMAC;

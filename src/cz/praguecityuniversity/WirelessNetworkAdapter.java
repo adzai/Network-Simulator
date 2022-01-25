@@ -1,5 +1,8 @@
 package cz.praguecityuniversity;
 
+/**
+ * Placeholder for a wireless network adapter implementation.
+ */
 public class WirelessNetworkAdapter extends NetworkAdapter {
 
     WirelessNetworkAdapter(Device device, TypeofEntity typeofEntity) {

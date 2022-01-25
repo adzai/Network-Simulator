@@ -1,5 +1,8 @@
 package cz.praguecityuniversity;
 
+/**
+ * IP message that extends an abstract class Message
+ */
 public class IPMessage extends Message {
     private IPAddress sourceIP;
     private IPAddress destinationIP;
