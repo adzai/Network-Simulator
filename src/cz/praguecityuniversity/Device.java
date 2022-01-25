@@ -1,5 +1,8 @@
 package cz.praguecityuniversity;
 
+/**
+ * Implementation of Device
+ */
 public class Device extends Entity {
     String deviceName;
     EthernetNetworkAdapter ethernetNetworkAdapter;
@@ -20,6 +23,12 @@ public class Device extends Entity {
         return IPProtocol;
     }
 
+    /**
+     * Gets either ethernet network adapter or wireless network adapter.
+     * @param device
+     * @return Returns ethernet network adapter if one of the defined port interfaces has a cabled connection,
+     * otherwise wireless network adapter.
+     */
     public NetworkAdapter getNetworkAdapter(Device device) {
         for (PortInterface portInterface : device.ethernetNetworkAdapter.arrayOfPortInterfaces) {
             if (portInterface.getConnection() != null) {
@@ -29,6 +38,15 @@ public class Device extends Entity {
         return device.wirelessNetworkAdapter;
     }
 
+    /**
+     * Redirects event to the chosen network adapter and
+     * sets the correct port interface trough which the event will be sent by the network adapter.
+     * Also, it adds delay simulating passing of time.
+     * @param event Event
+     * @param logger Logger for logging information related to event handling
+     * @return Returns handled event
+     * @throws EventFinished Thrown when the event is finished on the device
+     */
     @Override
     public Event handleEvent(Event event, EventLogger logger) throws EventFinished {
         event = IPProtocol.processFinalEvent(event, logger, this);

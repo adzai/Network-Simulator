@@ -1,5 +1,8 @@
 package cz.praguecityuniversity;
 
+/**
+ * Implementation of the event
+ */
 public class Event {
     private String eventName;
     private int startingTime;
