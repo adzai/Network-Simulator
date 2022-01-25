@@ -1,10 +1,5 @@
 package cz.praguecityuniversity;
 
-enum TypeOfConnection {
-    WIRELESS,
-    ETHERNET
-}
-
 public class Event {
     private String eventName;
     private int startingTime;
@@ -61,9 +56,11 @@ public class Event {
     public void setFrame(Frame frame) {
         this.frame = frame;
     }
+
     public Entity getEntity() {
         return entity;
     }
+
     public void setEntity(Entity entity) {
         this.entity = entity;
     }

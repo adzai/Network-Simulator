@@ -92,12 +92,18 @@ public class Simulation {
                 IPAddress ip = IPAddressFactory.getIPAddress(element.getElementsByTagName("IP").item(0).getTextContent());
                 ethernetNetworkAdapter.addIPAddressToPortInterface(interfaceID, ip);
                 IPProtocol IPProtocol = device.getIPProtocol();
-                if (device.typeofEntity == TypeofEntity.ROUTER){
-                    String assignedNetwork = element.getElementsByTagName("AssignedNetworkIP").item(0).getTextContent();
-                    IPProtocol.addStaticRoute(interfaceID, IPAddressFactory.getIPAddress(assignedNetwork),device.ethernetNetworkAdapter);                }
+                if (device.typeofEntity == TypeofEntity.ROUTER) {
+                    IPProtocol.addStaticRoute(interfaceID, IPAddressFactory.getIPAddress(ip.getNetworkAddressStr() + "/" + ip.getMask()),device.ethernetNetworkAdapter);
+                    NodeList staticRoutes = element.getElementsByTagName("StaticRoute");
+                    for (int index = 0; index < staticRoutes.getLength(); index++) {
+                        Node staticRouteNode = staticRoutes.item(index);
+                        String staticRouteString = staticRouteNode.getTextContent();
+                        IPProtocol.addStaticRoute(interfaceID, IPAddressFactory.getIPAddress(staticRouteString),device.ethernetNetworkAdapter);
+                        }
+                    }
+                }
             }
         }
-    }
 
     void parseLinks(Document doc) {
         NodeList list = doc.getElementsByTagName("Link");
