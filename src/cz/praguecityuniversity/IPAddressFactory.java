@@ -3,7 +3,19 @@ package cz.praguecityuniversity;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Creates relevant IPAddress implementation.
+ */
 public class IPAddressFactory {
+    /**
+     *
+     * @param IPString IP string.
+     * @return IPv4 on IPv6 based on the provided string.
+     * @throws InvalidMask Thrown when invalid IPv4 mask is provided.
+     * @throws InvalidIPAddress Thrown when invalid IP address is provided.
+     * @throws IPVersionNotRecognized Thrown when IP address does not match IPv4 or IPv6 protocols.
+     * @throws NotImplemented Thrown for missing IPv6 implementation.
+     */
     public static IPAddress getIPAddress(String IPString) throws InvalidMask, InvalidIPAddress, IPVersionNotRecognized, NotImplemented {
         String IPv4String = IPString.split("/")[0];
         final Pattern IPv4Pattern = Pattern.compile("^(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(\\.(?!$)|$)){4}$");

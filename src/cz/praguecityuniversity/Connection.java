@@ -1,5 +1,10 @@
 package cz.praguecityuniversity;
 
+/**
+ * Connection between devices.
+ * Has corruptionChance attribute that can corrupt the data in a message and
+ * dropChance attribute, that can drop the message altogether.
+ */
 abstract public class Connection extends Entity {
     private int corruptionChance = 15; // percentage chance
     private int dropChance = 15; // percentage chance

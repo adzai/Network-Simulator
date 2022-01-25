@@ -3,6 +3,10 @@ package cz.praguecityuniversity;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
+/**
+ * Responsible for scheduling and then calling the
+ * relevant event handlers.
+ */
 public class EventScheduler {
     PriorityQueue<Event> eventQueue;
     private final EventLogger logger;
@@ -12,10 +16,17 @@ public class EventScheduler {
         this.logger = logger;
     }
 
+    /**
+     * Inserts an event to the correct position in the PriorityQueue.
+     * @param event Event to be added.
+     */
     void schedule(Event event) {
         eventQueue.add(event);
     }
 
+    /**
+     * Processes the next event in the PriorityQueue.
+     */
     void next() {
         Event event = eventQueue.poll();
         if (event != null) {
@@ -33,11 +44,18 @@ public class EventScheduler {
         }
     }
 
+    /**
+     * @return Returns whether there are any more events to be processed.
+     */
     boolean isDone() {
         return eventQueue.size() == 0;
     }
 }
 
+/**
+ * Comparator for inserting events to the PriorityQueue based
+ * on their starting time.
+ */
 class EventComparator implements Comparator<Event> {
     public int compare(Event e1, Event e2) {
         if (e1.getStartingTime() > e2.getStartingTime())
