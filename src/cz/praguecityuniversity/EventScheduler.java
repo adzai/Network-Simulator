@@ -12,30 +12,32 @@ public class EventScheduler {
         this.logger = logger;
     }
 
-    void schedule(Event event){
+    void schedule(Event event) {
         eventQueue.add(event);
     }
-    void next(){
-       Event event = eventQueue.poll();
-       if (event != null) {
-           logger.log(event);
-           Event newEvent;
-           try {
-               newEvent = event.getEntity().handleEvent(event, logger);
-           } catch (EventFinished e) {
-               logger.logInfo(event.getStartingTime(), e.getMessage());
-               newEvent = null;
-           }
-           if (newEvent != null) {
-               this.schedule(newEvent);
-           }
-       }
+
+    void next() {
+        Event event = eventQueue.poll();
+        if (event != null) {
+            logger.log(event);
+            Event newEvent;
+            try {
+                newEvent = event.getEntity().handleEvent(event, logger);
+            } catch (EventFinished e) {
+                logger.logInfo(event.getStartingTime(), e.getMessage());
+                newEvent = null;
+            }
+            if (newEvent != null) {
+                this.schedule(newEvent);
+            }
+        }
     }
 
     boolean isDone() {
         return eventQueue.size() == 0;
     }
 }
+
 class EventComparator implements Comparator<Event> {
     public int compare(Event e1, Event e2) {
         if (e1.getStartingTime() > e2.getStartingTime())

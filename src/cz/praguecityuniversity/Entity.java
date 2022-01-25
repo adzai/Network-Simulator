@@ -1,13 +1,14 @@
 package cz.praguecityuniversity;
 
-abstract public class Entity implements EventHandler{
+abstract public class Entity implements EventHandler {
     TypeofEntity typeofEntity;
-    public Entity(TypeofEntity typeofEntity){
+
+    public Entity(TypeofEntity typeofEntity) {
         this.typeofEntity = typeofEntity;
     }
 }
 
-enum TypeofEntity{
+enum TypeofEntity {
     COMPUTER,
     ROUTER,
     NETWORKADAPTER,

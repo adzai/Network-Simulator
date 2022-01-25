@@ -1,7 +1,5 @@
 package cz.praguecityuniversity;
 
-import java.util.HashMap;
-
 public class DeviceFactory {
     public static Device getDevice(TypeofEntity typeofEntity, String deviceName, String macAddress) throws NotImplemented {
         return switch (typeofEntity) {

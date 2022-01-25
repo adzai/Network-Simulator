@@ -6,6 +6,7 @@ abstract public class Message {
     public Message(String data) {
         this.data = data;
     }
+
     public abstract IPAddress getSourceIP();
 
     public abstract void setSourceIP(IPAddress sourceIP);
@@ -18,7 +19,7 @@ abstract public class Message {
 
     public abstract void setTypeOfMessage(TypeOfMessage typeOfMessage);
 
-    public String getData(){
+    public String getData() {
         return data;
     }
 
