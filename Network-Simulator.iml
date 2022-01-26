@@ -19,5 +19,6 @@
     </orderEntry>
     <orderEntry type="library" name="testng" level="project" />
     <orderEntry type="library" name="junit.jupiter" level="project" />
+    <orderEntry type="library" name="org.junit.jupiter:junit-jupiter:5.7.0" level="project" />
   </component>
 </module>

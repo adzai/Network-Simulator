@@ -47,3 +47,13 @@ The simulation was implemented for Ethernet and IPv4 protocols. Below is provide
 ## Usage
 The users can test the simulation either by using the sample-config.xml file or by passing a config file name argument
 to the program. If the command-line arguments is not provided, then the program uses sample-config.xml file by default.
+
+## Tests
+The unit tests for IP addresses are provided. The tests are written using unit testing framework JUnit5.
+To run the tests, Junit5 library should be installed from Maven libraries: org.junit.jupiter:junit-jupiter:5.7.0.
+
+Detailed instructions of installing Junit5:
+
+```
+File -> Project Structure -> Libraries -> Add the library from Maven -> Paste the following: org.junit.jupiter:junit-jupiter:5.7.0
+```
