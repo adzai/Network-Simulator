@@ -12,6 +12,8 @@ maintenance and expandability.
 For testing the implementation, an example network and events are provided in the sample-config.xml file.
 The simulation was implemented for Ethernet and IPv4 protocols. Below is provided the diagram of the example network topology.
 
+![Network Topology](https://user-images.githubusercontent.com/56120787/151175227-07cea02d-0290-40e1-ac46-b489daf4e299.png)
+
 ## Functionalities
 
 * Configuration file – Network topology is created according to the specifications provided in the XML file.
